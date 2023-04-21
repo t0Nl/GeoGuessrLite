@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GeoGuessr Lite</string>
+    <string name="guess_label">Guess</string>
+    <string name="continue_label">Continue</string>
+    <string name="guess_points_label">Guess Points:</string>
+    <string name="total_score_label">Total Score:</string>
+    <string name="title_activity_maps">MapsActivity</string>
+</resources>

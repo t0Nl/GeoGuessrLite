@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smaller_spacing"
             android:background="@drawable/rounded_corner_shape"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/design_default_color_primary_dark"
             android:paddingHorizontal="@dimen/small_spacing"
             android:paddingVertical="@dimen/smaller_spacing"
             android:text="@{viewModel.currentTimeString}"

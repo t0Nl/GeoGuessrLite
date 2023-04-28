@@ -3,7 +3,6 @@ package com.example.android.geoguessrlite.game
 import android.animation.ValueAnimator
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,10 +96,8 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (this::streetView.isInitialized) {
-            viewModel.streetViewLocation.observe(viewLifecycleOwner) {
-                streetView.setPosition(it, STREET_VIEW_RADIUS)
-            }
+        viewModel.streetViewLocation.observe(viewLifecycleOwner) {
+            streetView.setPosition(it, STREET_VIEW_RADIUS)
         }
     }
 

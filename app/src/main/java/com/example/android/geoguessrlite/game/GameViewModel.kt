@@ -4,13 +4,13 @@ import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
+import com.example.android.geoguessrlite.network.GuessLocationsApi
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polyline
+import kotlinx.coroutines.launch
+import androidx.lifecycle.viewModelScope as viewModelScope1
 
 class GameViewModel(
     application: Application
@@ -61,8 +61,8 @@ class GameViewModel(
         _currentTime.value = COUNTDOWN_TIME
         _guessPoints.value = 0
         _gameScore.value = 0
-//        _streetViewLocation.value = LatLng(34.02564945973906, 133.58908616604322)
-        _streetViewLocation.value = LatLng(45.333706614220254, 14.454505105161306)
+        startTimer()
+        getGuessLocation()
     }
 
     fun updateCurrentMarker(newMarker: Marker?) {
@@ -89,9 +89,23 @@ class GameViewModel(
         return ((21000000L - distanceFromTarget) / 100000).toInt()
     }
 
+    private fun getGuessLocation() {
+        viewModelScope1.launch {
+            try {
+                val bounds = GuessLocationsApi.retrofitService.getProperties()
+                _streetViewLocation.value = LatLng(
+                    (bounds.first().bounds.max.lat + bounds.first().bounds.min.lat)/2,
+                    (bounds.first().bounds.max.lng + bounds.first().bounds.min.lng)/2
+                )
+            } catch (e: Exception) {
+                gameEnd()
+            }
+        }
+    }
+
     fun loadNextLocation() {
+        getGuessLocation()
         _guessCompleted.value = false
-        startTimer()
     }
 
     fun startTimer() {

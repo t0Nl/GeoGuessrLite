@@ -3,6 +3,7 @@ package com.example.android.geoguessrlite.game
 import android.animation.ValueAnimator
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ private val DEFAULT_LAT_LNG = LatLng(0.0, 0.0)
 
 private const val FINAL_RESULT_ARRAY_SIZE = 3
 private const val RESULT_ZOOM_LEVEL = 2f
+private const val STREET_VIEW_RADIUS = 10000
 
 private const val HIDE_RESULT_ALPHA = 0f
 private const val SHOW_RESULT_ALPHA = .7f
@@ -97,7 +99,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
         if (this::streetView.isInitialized) {
             viewModel.streetViewLocation.observe(viewLifecycleOwner) {
-                streetView.setPosition(it)
+                streetView.setPosition(it, STREET_VIEW_RADIUS)
             }
         }
     }
@@ -122,8 +124,13 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         streetView = streetViewPanorama
         streetView.isStreetNamesEnabled = false
         streetView.isUserNavigationEnabled = false
+
+        streetView.setOnStreetViewPanoramaChangeListener {
+            viewModel.startTimer()
+        }
+
         viewModel.streetViewLocation.value?.let {
-            streetView.setPosition(it)
+            streetView.setPosition(it, STREET_VIEW_RADIUS)
         }
     }
 

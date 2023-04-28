@@ -3,6 +3,7 @@ package com.example.android.geoguessrlite.game
 import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,16 +22,13 @@ class GameViewModel(
 
         private const val ONE_SECOND = 1000L
 
-        private const val COUNTDOWN_TIME = 60000L
+        private const val COUNTDOWN_TIME = 60L
     }
 
-    private var timer: CountDownTimer
+    private lateinit var timer: CountDownTimer
 
     private val _guessCompleted = MutableLiveData<Boolean>()
     val guessCompleted: LiveData<Boolean> = _guessCompleted
-
-    private val _timerPaused = MutableLiveData<Boolean>()
-    val timerPaused: LiveData<Boolean> = _timerPaused
 
     private val _streetViewLocation = MutableLiveData<LatLng>()
     val streetViewLocation: LiveData<LatLng> = _streetViewLocation
@@ -60,25 +58,11 @@ class GameViewModel(
 
     init {
         _guessCompleted.value = false
-        _timerPaused.value = false
+        _currentTime.value = COUNTDOWN_TIME
         _guessPoints.value = 0
         _gameScore.value = 0
+//        _streetViewLocation.value = LatLng(34.02564945973906, 133.58908616604322)
         _streetViewLocation.value = LatLng(45.333706614220254, 14.454505105161306)
-
-        timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND) {
-            override fun onTick(millisUntilFinished: Long) {
-                if (_timerPaused.value == false) {
-                    _currentTime.value = (millisUntilFinished / ONE_SECOND)
-                }
-            }
-
-            override fun onFinish() {
-                _currentTime.value = currentTime.value
-                gameEnd()
-            }
-        }
-
-        timer.start()
     }
 
     fun updateCurrentMarker(newMarker: Marker?) {
@@ -95,7 +79,7 @@ class GameViewModel(
 
     fun locationGuessed(distanceFromTarget: Float) {
         _guessCompleted.value = true
-        _timerPaused.value = true
+        timer.cancel()
         val guessScore = calculateGuessScore(distanceFromTarget)
         _guessPoints.value = guessScore
         _gameScore.value = _gameScore.value?.plus(guessScore)
@@ -107,7 +91,21 @@ class GameViewModel(
 
     fun loadNextLocation() {
         _guessCompleted.value = false
-        _timerPaused.value = false
+        startTimer()
+    }
+
+    fun startTimer() {
+        timer = object : CountDownTimer(_currentTime.value?.times(1000) ?: COUNTDOWN_TIME, ONE_SECOND) {
+            override fun onTick(millisUntilFinished: Long) {
+                _currentTime.value = (millisUntilFinished / ONE_SECOND)
+            }
+
+            override fun onFinish() {
+                gameEnd()
+            }
+        }
+
+        timer.start()
     }
 
     fun gameEnd() {

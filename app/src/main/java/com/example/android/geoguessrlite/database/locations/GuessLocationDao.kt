@@ -29,7 +29,7 @@ interface GuessLocationDao {
      *
      * @param key startTimeMilli to match
      */
-    @Query("SELECT * FROM guess_location_table WHERE scoreId = :key")
+    @Query("SELECT * FROM guess_location_table WHERE locationId = :key")
     suspend fun get(key: Long): GuessLocation?
 
     /**
@@ -45,9 +45,9 @@ interface GuessLocationDao {
      *
      * sorted by start time in descending order.
      */
-    @Query("SELECT * FROM guess_location_table WHERE gameDuration=:gameDuration AND gameCategory=:gameCategory ORDER BY finalScore DESC")
-    fun getRandomLocation(gameCategory: GameCategory): LiveData<List<GameScore>>
+    @Query("SELECT * FROM guess_location_table ORDER BY RANDOM() LIMIT 1")
+    fun getRandomLocation(): GuessLocation
 
-    @Query("SELECT * FROM guess_location_table WHERE gameDuration=:gameDuration AND gameCategory=:gameCategory ORDER BY finalScore DESC")
-    fun getRandomLocationFromCategory(gameDuration: GameDuration, gameCategory: GameCategory): LiveData<List<GameScore>>
+    @Query("SELECT * FROM guess_location_table WHERE location_category = :locationCategory ORDER BY RANDOM() LIMIT 1")
+    fun getRandomLocationFromRegion(locationCategory: GameCategory): GuessLocation
 }

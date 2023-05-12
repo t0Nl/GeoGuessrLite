@@ -7,5 +7,5 @@ enum class GameCategory(val label: String) {
     EUROPE("Europe"),
     AFRICA("Africa"),
     ASIA("Asia"),
-    AUSTRALIA("Australia"),
+    AUSTRALIA_PACIFIC("Australia Pacific"),
 }

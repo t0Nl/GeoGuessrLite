@@ -1,29 +1,47 @@
 package com.example.android.geoguessrlite.database.locations
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
-import com.example.android.geoguessrlite.database.GameCategory
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.android.geoguessrlite.database.Converters
 
-@Dao
-interface LocationDatabase {
+@Database(entities = [GuessLocation::class], version = 1, exportSchema = false)
+abstract class LocationDatabase : RoomDatabase() {
+    abstract val guessLocationDao: GuessLocationDao
 
-    @Insert
-    suspend fun insert(location: GuessLocation)
+    companion object {
+        @Volatile
+        private var INSTANCE: LocationDatabase? = null
 
-    @Update
-    suspend fun update(location: GuessLocation)
-
-    @Query("SELECT * FROM guess_location_table WHERE locationId = :key")
-    suspend fun get(key: Long): GuessLocation?
-
-    @Query("DELETE FROM guess_location_table")
-    suspend fun clear()
-
-    @Query("SELECT * FROM guess_location_table ORDER BY RAND() LIMIT 1")
-    fun getRandomLocation(): GuessLocation
-
-    @Query("SELECT * FROM guess_location_table WHERE location_category = :locationCategory ORDER BY RAND() LIMIT 1")
-    fun getRandomLocationFromRegion(locationCategory: GameCategory): GuessLocation
+        fun getInstance(context: Context): LocationDatabase {
+            // Multiple threads can ask for the database at the same time, ensure we only initialize
+            // it once by using synchronized. Only one thread may enter a synchronized block at a
+            // time.
+            synchronized(this) {
+                // Copy the current value of INSTANCE to a local variable so Kotlin can smart cast.
+                // Smart cast is only available to local variables.
+                var instance = INSTANCE
+                // If instance is `null` make a new database instance.
+                if (instance == null) {
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        LocationDatabase::class.java,
+                        "game_locations_database"
+                    )
+                        // Wipes and rebuilds instead of migrating if no Migration object.
+                        // Migration is not part of this lesson. You can learn more about
+                        // migration with Room in this blog post:
+                        // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
+                        .fallbackToDestructiveMigration()
+                        .build()
+                    // Assign INSTANCE to the newly created database.
+                    INSTANCE = instance
+                }
+                // Return instance; smart cast to be non-null.
+                return instance
+            }
+        }
+    }
 }

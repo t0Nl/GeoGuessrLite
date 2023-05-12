@@ -32,7 +32,7 @@ class Converters {
                 GameCategory.EUROPE.label -> GameCategory.EUROPE
                 GameCategory.ASIA.label -> GameCategory.ASIA
                 GameCategory.AFRICA.label -> GameCategory.AFRICA
-                else -> GameCategory.AUSTRALIA
+                else -> GameCategory.AUSTRALIA_PACIFIC
             }
         }
     }
@@ -40,5 +40,15 @@ class Converters {
     @TypeConverter
     fun toGameCategory(gameCategory: GameCategory?): String? {
         return gameCategory?.label
+    }
+
+    @TypeConverter
+    fun fromDouble(value: String?): Double? {
+        return value?.toDouble()
+    }
+
+    @TypeConverter
+    fun toDouble(coordinate: Double?): String? {
+        return coordinate?.toString()
     }
 }

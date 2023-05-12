@@ -7,7 +7,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.example.android.geoguessrlite.database.GameCategory
+import com.example.android.geoguessrlite.database.locations.GuessLocation
+import com.example.android.geoguessrlite.database.locations.LocationDatabase
 import com.example.android.geoguessrlite.network.GuessLocationsApi
+import com.example.android.geoguessrlite.util.ContinentFinder
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
@@ -27,6 +31,8 @@ class GameViewModel(
 
         private const val COUNTDOWN_TIME = 60L
     }
+
+    val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
 
     private lateinit var timer: CountDownTimer
 
@@ -68,7 +74,7 @@ class GameViewModel(
         _currentTime.value = COUNTDOWN_TIME
         _guessPoints.value = 0
         _gameScore.value = 0
-        getGuessLocation()
+        loadNextLocation()
     }
 
     fun updateCurrentMarker(newMarker: Marker?) {
@@ -95,36 +101,55 @@ class GameViewModel(
         return ((21000000L - distanceFromTarget) / 100000).toInt()
     }
 
-    private fun getGuessLocation() {
+    fun loadNextLocation() {
         viewModelScope1.launch {
             try {
-                val bounds = GuessLocationsApi.retrofitService.getProperties()
-                val guessLocationBounds = LatLngBounds.Builder()
-                    .include(
-                        LatLng(
-                            bounds.first().bounds.max.lat,
-                            bounds.first().bounds.max.lng
+                val continentFinder = ContinentFinder()
+                val locations = GuessLocationsApi.retrofitService.getProperties()
+                var locationContinent: GameCategory? = null
+
+                for (location in locations) {
+                    val guessLocationBounds = LatLngBounds.Builder()
+                        .include(
+                            LatLng(
+                                location.bounds.max.lat,
+                                location.bounds.max.lng
+                            )
                         )
-                    )
-                    .include(
-                        LatLng(
-                            bounds.first().bounds.min.lat,
-                            bounds.first().bounds.min.lng
+                        .include(
+                            LatLng(
+                                location.bounds.min.lat,
+                                location.bounds.min.lng
+                            )
                         )
-                    )
-                    .build()
-                _streetViewLocation.value = guessLocationBounds.center
+                        .build()
+
+                    locationContinent = continentFinder.getContinent(guessLocationBounds.center)
+
+                    if (locationContinent != null) {
+                        _streetViewLocation.value = guessLocationBounds.center
+
+                        locationDatabase.insert(
+                            GuessLocation(
+                                locationLatitude = guessLocationBounds.center.latitude,
+                                locationLongitude = guessLocationBounds.center.longitude,
+                                gameCategory = locationContinent,
+                            )
+                        )
+
+                        break
+                    }
+                }
+                if (locationContinent == null) {
+                    throw java.lang.Exception("Location API error")
+                }
             } catch (e: Exception) {
                 _eventGameFinish.value = true
             }
         }
     }
 
-    fun loadNextLocation() {
-        getGuessLocation()
-    }
-
-    fun starteNextLocation() {
+    fun startNextLocation() {
         _guessCompleted.value = false
     }
 

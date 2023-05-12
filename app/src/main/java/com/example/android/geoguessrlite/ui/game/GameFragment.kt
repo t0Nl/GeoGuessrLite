@@ -3,7 +3,6 @@ package com.example.android.geoguessrlite.ui.game
 import android.animation.ValueAnimator
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,8 +12,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.android.geoguessrlite.R
 import com.example.android.geoguessrlite.databinding.FragmentGameBinding
-import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback
+import com.google.android.gms.maps.StreetViewPanorama
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 
 private const val DEFAULT_RESULT_BOUNDS_PADDING_VALUE = 280
 private val DEFAULT_LAT_LNG = LatLng(0.0, 0.0)
@@ -65,7 +74,6 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
                 transitionToStreetView()
                 hideGuessResult()
-//                viewModel.loadNextLocation()
             } else {
                 binding.guessButton.text = getString(R.string.continue_label)
 
@@ -110,6 +118,16 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         }
     }
 
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        try {
+//            val locationDatabase = LocationDatabase.getInstance(context).guessLocationDao
+//        } catch (e: Exception) {
+//            Log.e("TONI", "onCreateView", e)
+//            throw e
+//        }
+//    }
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
@@ -153,7 +171,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     }
 
     private fun hideGuessResult() {
-        viewModel.starteNextLocation()
+        viewModel.startNextLocation()
         hideGuessResultAnimator(binding.guessPointsDisplay)
         hideGuessResultAnimator(binding.guessPointsLabel)
         hideGuessResultAnimator(binding.totalScoreDisplay)
@@ -183,10 +201,6 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                 )
             )
         }
-        // reset map zoom and position
-//        map.animateCamera(
-//            CameraUpdateFactory.newLatLngZoom(targetLocation, RESULT_ZOOM_LEVEL)
-//        )
     }
 
     private fun transitionToMap() {

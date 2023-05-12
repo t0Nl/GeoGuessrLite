@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.android.geoguessrlite.game.GameViewModel" />
+            type="com.example.android.geoguessrlite.ui.game.GameViewModel" />
 
     </data>
 

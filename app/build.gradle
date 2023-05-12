@@ -2,12 +2,11 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
-apply plugin: 'kotlin-kapt'
-
 android {
-    namespace 'com.example.android.geoguessrlite'
     compileSdk 33
 
     defaultConfig {

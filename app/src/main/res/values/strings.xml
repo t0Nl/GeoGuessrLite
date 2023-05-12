@@ -2,7 +2,14 @@
     <string name="app_name">GeoGuessr Lite</string>
     <string name="guess_label">Guess</string>
     <string name="continue_label">Continue</string>
+    <string name="game_category_label">Game Category:</string>
+    <string name="game_duration_label">Game Duration:</string>
     <string name="guess_points_label">Guess Points:</string>
+    <string name="final_score_label">Final Score:</string>
     <string name="total_score_label">Total Score:</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="play_again">Play Again</string>
+    <string name="see_leaderboard">See Leaderboard</string>
+    <string name="return_to_title">Return to Title</string>
 </resources>

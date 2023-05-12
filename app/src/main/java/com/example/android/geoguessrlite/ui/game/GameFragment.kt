@@ -1,14 +1,16 @@
-package com.example.android.geoguessrlite.game
+package com.example.android.geoguessrlite.ui.game
 
 import android.animation.ValueAnimator
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.android.geoguessrlite.R
 import com.example.android.geoguessrlite.databinding.FragmentGameBinding
 import com.google.android.gms.maps.*
@@ -56,37 +58,30 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
         binding.guessButton.setOnClickListener {
             if (viewModel.guessCompleted.value == true) {
+                resetMapView()
+
                 binding.guessButton.text = getString(R.string.guess_label)
-                binding.pinButton.isEnabled = true
-                binding.mapButton.isEnabled = true
+                binding.guessButton.isEnabled = false
 
                 transitionToStreetView()
-                resetMapView()
                 hideGuessResult()
-                viewModel.loadNextLocation()
+//                viewModel.loadNextLocation()
             } else {
                 binding.guessButton.text = getString(R.string.continue_label)
-                binding.pinButton.isEnabled = false
-                binding.mapButton.isEnabled = false
 
                 transitionToMap()
                 rateGuessAccuracy()
                 disableMapClicks()
                 showGuessResult()
+                viewModel.loadNextLocation()
             }
         }
 
         binding.mapButton.setOnClickListener {
-            binding.pinButton.isEnabled = true
-            binding.mapButton.isEnabled = false
-
             transitionToMap()
         }
 
         binding.pinButton.setOnClickListener {
-            binding.pinButton.isEnabled = false
-            binding.mapButton.isEnabled = true
-
             transitionToStreetView()
         }
 
@@ -96,8 +91,22 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.streetViewLocation.observe(viewLifecycleOwner) {
-            streetView.setPosition(it, STREET_VIEW_RADIUS)
+        viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
+            guessLocation?.let {
+                streetView.setPosition(it, STREET_VIEW_RADIUS)
+            }
+        }
+
+        viewModel.eventGameFinish.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController(this).navigate(
+                    GameFragmentDirections.actionGameFragmentToResultFragment(
+                        viewModel.gameScore.value?.toLong() ?: 0L,
+                        "World",
+                        60,
+                    )
+                )
+            }
         }
     }
 
@@ -125,10 +134,6 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         streetView.setOnStreetViewPanoramaChangeListener {
             viewModel.startTimer()
         }
-
-        viewModel.streetViewLocation.value?.let {
-            streetView.setPosition(it, STREET_VIEW_RADIUS)
-        }
     }
 
     private fun showGuessResult() {
@@ -148,6 +153,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     }
 
     private fun hideGuessResult() {
+        viewModel.starteNextLocation()
         hideGuessResultAnimator(binding.guessPointsDisplay)
         hideGuessResultAnimator(binding.guessPointsLabel)
         hideGuessResultAnimator(binding.totalScoreDisplay)
@@ -184,6 +190,9 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     }
 
     private fun transitionToMap() {
+        binding.pinButton.isEnabled = true
+        binding.mapButton.isEnabled = false
+
         binding.map.animate()
             .translationX(-1f)
             .setDuration(500)
@@ -197,6 +206,9 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     }
 
     private fun transitionToStreetView() {
+        binding.pinButton.isEnabled = false
+        binding.mapButton.isEnabled = true
+
         binding.map.startAnimation(
             AnimationUtils.loadAnimation(requireContext(), R.anim.pager_translation_map_exit)
         )

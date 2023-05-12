@@ -1,12 +1,15 @@
-package com.example.android.geoguessrlite.game
+package com.example.android.geoguessrlite.ui.game
 
 import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.android.geoguessrlite.network.GuessLocationsApi
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polyline
 import kotlinx.coroutines.launch
@@ -48,6 +51,10 @@ class GameViewModel(
     private val _gameScore = MutableLiveData<Int>()
     val gameScore: LiveData<Int> = _gameScore
 
+    private val _eventGameFinish = MutableLiveData<Boolean>()
+    val eventGameFinish: LiveData<Boolean>
+        get() = _eventGameFinish
+
     private val _currentTime = MutableLiveData<Long>()
     val currentTime: LiveData<Long>
         get() = _currentTime
@@ -61,7 +68,6 @@ class GameViewModel(
         _currentTime.value = COUNTDOWN_TIME
         _guessPoints.value = 0
         _gameScore.value = 0
-        startTimer()
         getGuessLocation()
     }
 
@@ -93,36 +99,47 @@ class GameViewModel(
         viewModelScope1.launch {
             try {
                 val bounds = GuessLocationsApi.retrofitService.getProperties()
-                _streetViewLocation.value = LatLng(
-                    (bounds.first().bounds.max.lat + bounds.first().bounds.min.lat)/2,
-                    (bounds.first().bounds.max.lng + bounds.first().bounds.min.lng)/2
-                )
+                val guessLocationBounds = LatLngBounds.Builder()
+                    .include(
+                        LatLng(
+                            bounds.first().bounds.max.lat,
+                            bounds.first().bounds.max.lng
+                        )
+                    )
+                    .include(
+                        LatLng(
+                            bounds.first().bounds.min.lat,
+                            bounds.first().bounds.min.lng
+                        )
+                    )
+                    .build()
+                _streetViewLocation.value = guessLocationBounds.center
             } catch (e: Exception) {
-                gameEnd()
+                _eventGameFinish.value = true
             }
         }
     }
 
     fun loadNextLocation() {
         getGuessLocation()
+    }
+
+    fun starteNextLocation() {
         _guessCompleted.value = false
     }
 
     fun startTimer() {
-        timer = object : CountDownTimer(_currentTime.value?.times(1000) ?: COUNTDOWN_TIME, ONE_SECOND) {
-            override fun onTick(millisUntilFinished: Long) {
-                _currentTime.value = (millisUntilFinished / ONE_SECOND)
-            }
+        timer =
+            object : CountDownTimer(_currentTime.value?.times(1000) ?: COUNTDOWN_TIME, ONE_SECOND) {
+                override fun onTick(millisUntilFinished: Long) {
+                    _currentTime.value = (millisUntilFinished / ONE_SECOND)
+                }
 
-            override fun onFinish() {
-                gameEnd()
+                override fun onFinish() {
+                    _eventGameFinish.value = true
+                }
             }
-        }
 
         timer.start()
-    }
-
-    fun gameEnd() {
-
     }
 }

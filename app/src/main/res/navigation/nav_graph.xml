@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/gameFragment">
+    app:startDestination="@id/titleFragment">
 
     <fragment
         android:id="@+id/gameFragment"
@@ -20,7 +20,18 @@
             android:name="finalScore"
             app:argType="long" />
         <argument
-            android:name="gameCategory"
+            android:name="gameType"
+            app:argType="string" />
+        <argument
+            android:name="gameDuration"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.android.geoguessrlite.ui.title.TitleFragment"
+        android:label="TitleFragment" >
+        <argument
+            android:name="gameType"
             app:argType="string" />
         <argument
             android:name="gameDuration"

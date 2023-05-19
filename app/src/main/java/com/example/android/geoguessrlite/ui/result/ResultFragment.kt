@@ -18,7 +18,7 @@ class ResultFragment : Fragment() {
 
     private fun setResults() {
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        binding.categoryValue.text = args.gameCategory
+        binding.categoryValue.text = args.gameType
         binding.durationValue.text = args.gameDuration.toString()
         binding.finalScoreValue.text = args.finalScore.toString()
     }

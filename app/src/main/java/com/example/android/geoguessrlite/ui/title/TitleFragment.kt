@@ -17,8 +17,12 @@ class TitleFragment : Fragment() {
 
     private fun setGameSettings() {
         val args = TitleFragmentArgs.fromBundle(requireArguments())
-        viewModel.setGameType(args.gameType)
-        viewModel.setGameDuration(args.gameDuration.toString())
+        args.gameType?.let {
+            viewModel.setGameType(it)
+        }
+        args.gameDuration?.let {
+            viewModel.setGameDuration(it)
+        }
     }
 
     override fun onCreateView(
@@ -34,6 +38,6 @@ class TitleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setGameSettings()
+        setGameSettings()
     }
 }

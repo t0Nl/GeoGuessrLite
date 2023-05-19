@@ -32,9 +32,13 @@
         android:label="TitleFragment" >
         <argument
             android:name="gameType"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <argument
             android:name="gameDuration"
-            app:argType="integer" />
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

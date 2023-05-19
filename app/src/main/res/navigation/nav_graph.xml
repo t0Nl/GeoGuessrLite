@@ -33,13 +33,13 @@
         <argument
             android:name="gameType"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:defaultValue="@null"
+            app:nullable="true" />
         <argument
             android:name="gameDuration"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:defaultValue="@null"
+            app:nullable="true" />
         <action
             android:id="@+id/action_titleFragment_to_selectionFragment"
             app:destination="@id/selectionFragment" />
@@ -51,5 +51,8 @@
         <argument
             android:name="selectionType"
             app:argType="string" />
+        <action
+            android:id="@+id/action_selectionFragment_to_titleFragment"
+            app:destination="@id/titleFragment" />
     </fragment>
 </navigation>

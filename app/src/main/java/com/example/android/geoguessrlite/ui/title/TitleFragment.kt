@@ -1,6 +1,7 @@
 package com.example.android.geoguessrlite.ui.title
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class TitleFragment : Fragment() {
 
     private fun setGameSettings() {
         val args = TitleFragmentArgs.fromBundle(requireArguments())
+        Log.e("TONI", "LESS GO")
         args.gameType?.let {
             viewModel.setGameType(it)
         }

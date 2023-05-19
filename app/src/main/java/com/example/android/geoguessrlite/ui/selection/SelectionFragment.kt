@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentSelectionBinding
 
 class SelectionFragment : Fragment() {
@@ -26,7 +27,11 @@ class SelectionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val adapter = SelectionOptionAdapter()
+        val adapter = SelectionOptionAdapter(
+            OptionClickListenerListener { label ->
+                viewModel.onOptionClicked(label)
+            }
+        )
 
         binding = FragmentSelectionBinding.inflate(inflater)
         binding.viewModel = viewModel
@@ -35,6 +40,27 @@ class SelectionFragment : Fragment() {
         viewModel.fragmentSelectionOptions.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+            }
+        })
+
+        viewModel.finishSelection.observe(viewLifecycleOwner, Observer { label ->
+            label?.let {
+                when (viewModel.fragmentSelectionType.value) {
+                    SelectionType.GAME_TYPE -> {
+                        this.findNavController().navigate(
+                            SelectionFragmentDirections
+                                .actionSelectionFragmentToTitleFragment()
+                                .setGameType(label)
+                        )
+                    }
+                    else -> {
+                        this.findNavController().navigate(
+                            SelectionFragmentDirections
+                                .actionSelectionFragmentToTitleFragment()
+                                .setGameDuration(label)
+                        )
+                    }
+                }
             }
         })
 

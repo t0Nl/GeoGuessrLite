@@ -15,13 +15,20 @@ class SelectionViewModel(
     private val _fragmentSelectionType = MutableLiveData<SelectionType>()
     val fragmentSelectionType: LiveData<SelectionType> get() = _fragmentSelectionType
 
+    private val _finishSelection = MutableLiveData<String>()
+    val finishSelection
+        get() = _finishSelection
+
     private val _fragmentSelectionOptions = MutableLiveData<List<String>>()
     val fragmentSelectionOptions: LiveData<List<String>> get() = _fragmentSelectionOptions
 
     fun setSelectionOptions(selectionType: String) {
         _fragmentSelectionType.value = selectionType.toSelectionType()
         _fragmentSelectionOptions.value = fragmentSelectionType.value?.toSelectionOptions()
-        Log.e("TONI", "Something")
+    }
+
+    fun onOptionClicked(label: String) {
+        _finishSelection.value = label
     }
 }
 

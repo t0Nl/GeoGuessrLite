@@ -9,6 +9,10 @@
         <variable
             name="label"
             type="String" />
+
+        <variable
+            name="clickListener"
+            type="com.example.android.geoguessrlite.ui.selection.OptionClickListenerListener" />
     </data>
 
     <Button
@@ -19,6 +23,7 @@
         android:paddingStart="@dimen/normal_spacing"
         android:paddingEnd="@dimen/normal_spacing"
         app:label="@{label}"
+        android:onClick="@{() -> clickListener.onClick(label)}"
         android:textSize="24sp" />
 
 </layout>

@@ -23,7 +23,8 @@ class SelectionOptionAdapter : ListAdapter<String, ViewHolder>(SleepNightDiffCal
 
 class ViewHolder private constructor(val binding: SelectionItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: String) {
-        binding.selectionButton.text = item
+        binding.label = item
+        binding.executePendingBindings()
     }
 
     companion object {
@@ -32,11 +33,6 @@ class ViewHolder private constructor(val binding: SelectionItemViewBinding) : Re
             val binding = SelectionItemViewBinding.inflate(layoutInflater, parent, false)
 
             return ViewHolder(binding)
-
-//            val view = layoutInflater
-//                .inflate(R.layout.selection_item_view, parent, false)
-//
-//            return ViewHolder(view)
         }
     }
 }

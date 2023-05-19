@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.geoguessrlite.R
+import com.example.android.geoguessrlite.databinding.SelectionItemViewBinding
 
 class SelectionOptionAdapter : ListAdapter<String, ViewHolder>(SleepNightDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -20,20 +21,22 @@ class SelectionOptionAdapter : ListAdapter<String, ViewHolder>(SleepNightDiffCal
     }
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val selectionButton: Button = itemView.findViewById(R.id.selectionButton)
-
+class ViewHolder private constructor(val binding: SelectionItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: String) {
-        selectionButton.text = item
+        binding.selectionButton.text = item
     }
 
     companion object {
         fun from(parent: ViewGroup): ViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater
-                .inflate(R.layout.selection_item_view, parent, false)
+            val binding = SelectionItemViewBinding.inflate(layoutInflater, parent, false)
 
-            return ViewHolder(view)
+            return ViewHolder(binding)
+
+//            val view = layoutInflater
+//                .inflate(R.layout.selection_item_view, parent, false)
+//
+//            return ViewHolder(view)
         }
     }
 }

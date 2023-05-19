@@ -43,10 +43,12 @@
 
         <Button
             android:id="@+id/selectGameType"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
-            android:drawableStart="@drawable/game_type_icon"
+            app:icon="@drawable/game_type_icon"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             android:padding="16dp"
             android:text="@{@string/game_type_label + viewModel.selectedGameType}"
             app:layout_constraintBottom_toTopOf="@+id/selectGameDuration"
@@ -55,22 +57,26 @@
 
         <Button
             android:id="@+id/selectGameDuration"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
-            android:drawableStart="@drawable/game_duration_icon"
             android:padding="16dp"
             android:text="@{@string/game_duration_label + viewModel.selectedGameDuration}"
+            app:icon="@drawable/game_duration_icon"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             app:layout_constraintBottom_toTopOf="@+id/startGameButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/startGameButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
-            android:drawableStart="@drawable/game_icon"
+            app:icon="@drawable/game_icon"
+            android:backgroundTint="@color/cardview_shadow_end_color"
             android:padding="16dp"
             android:text="@string/start_game_button"
             app:layout_constraintBottom_toBottomOf="parent"

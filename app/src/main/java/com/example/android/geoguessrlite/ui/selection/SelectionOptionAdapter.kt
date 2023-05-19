@@ -4,20 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.geoguessrlite.R
 
-class SelectionOptionAdapter : RecyclerView.Adapter<ViewHolder>() {
-    var data = listOf<String>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount() = data.size
-
+class SelectionOptionAdapter : ListAdapter<String, ViewHolder>(SleepNightDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -26,7 +20,7 @@ class SelectionOptionAdapter : RecyclerView.Adapter<ViewHolder>() {
     }
 }
 
-class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val selectionButton: Button = itemView.findViewById(R.id.selectionButton)
 
     fun bind(item: String) {
@@ -41,5 +35,16 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
             return ViewHolder(view)
         }
+    }
+}
+
+class SleepNightDiffCallback :
+    DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
     }
 }

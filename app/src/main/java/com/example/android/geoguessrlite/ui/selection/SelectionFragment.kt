@@ -34,7 +34,7 @@ class SelectionFragment : Fragment() {
 
         viewModel.fragmentSelectionOptions.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 

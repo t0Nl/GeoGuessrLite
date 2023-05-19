@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.geoguessrlite.database.GameCategory
-import com.example.android.geoguessrlite.database.score.GameDuration
+import com.example.android.geoguessrlite.database.GameDuration
 
 private val DEFAULT_GAME_TYPE = GameCategory.WORLD
 private val DEFAULT_GAME_DURATION = GameDuration.ONE_MINUTE

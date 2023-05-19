@@ -1,13 +1,10 @@
 package com.example.android.geoguessrlite.database.locations
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.android.geoguessrlite.database.GameCategory
-import com.example.android.geoguessrlite.database.score.GameDuration
-import com.example.android.geoguessrlite.database.score.GameScore
 
 @Dao
 interface GuessLocationDao {

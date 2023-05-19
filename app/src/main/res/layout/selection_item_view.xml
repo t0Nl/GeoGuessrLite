@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textSize="24sp"
+    android:paddingStart="@dimen/normal_spacing"
+    android:paddingEnd="@dimen/normal_spacing"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />

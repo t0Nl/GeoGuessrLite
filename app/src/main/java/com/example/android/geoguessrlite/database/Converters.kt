@@ -2,7 +2,6 @@ package com.example.android.geoguessrlite.database
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.example.android.geoguessrlite.database.score.GameDuration
 
 @ProvidedTypeConverter
 class Converters {

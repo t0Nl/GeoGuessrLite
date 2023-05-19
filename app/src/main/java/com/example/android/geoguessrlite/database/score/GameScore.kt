@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android.geoguessrlite.database.GameCategory
+import com.example.android.geoguessrlite.database.GameDuration
 
 @Entity(tableName = "game_score_table")
 data class GameScore(
@@ -20,8 +21,3 @@ data class GameScore(
     var gameCategory: GameCategory,
 )
 
-enum class GameDuration(val durationSeconds: Int) {
-        ONE_MINUTE(60),
-        THREE_MINUTES(180),
-        FIVE_MINUTES(300),
-}

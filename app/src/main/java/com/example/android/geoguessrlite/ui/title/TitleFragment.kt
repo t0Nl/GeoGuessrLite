@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentTitleBinding
+import com.example.android.geoguessrlite.ui.selection.SelectionType
 
 class TitleFragment : Fragment() {
     private val viewModel: TitleViewModel by lazy {
@@ -37,6 +39,13 @@ class TitleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.selectGameType.setOnClickListener { buttonView: View ->
+            buttonView.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_TYPE.label))
+        }
+        binding.selectGameDuration.setOnClickListener { buttonView: View ->
+            buttonView.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_DURATION.label))
+        }
 
         setGameSettings()
     }

@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.android.geoguessrlite.database.GameCategory
+import com.example.android.geoguessrlite.database.GameDuration
 
 @Dao
 interface ScoreDatabaseDao {

@@ -3,6 +3,7 @@ package com.example.android.geoguessrlite.ui.game
 import android.app.Application
 import android.os.CountDownTimer
 import android.text.format.DateUtils
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,6 +39,9 @@ class GameViewModel(
 
     private val _guessCompleted = MutableLiveData<Boolean>()
     val guessCompleted: LiveData<Boolean> = _guessCompleted
+
+    private val _streetViewLoaded = MutableLiveData<Boolean>()
+    val streetViewLoaded: LiveData<Boolean> = _streetViewLoaded
 
     private val _streetViewLocation = MutableLiveData<LatLng>()
     val streetViewLocation: LiveData<LatLng> = _streetViewLocation
@@ -102,6 +106,8 @@ class GameViewModel(
     }
 
     fun loadNextLocation() {
+        _streetViewLoaded.value = false
+
         viewModelScope1.launch {
             try {
                 val continentFinder = ContinentFinder()
@@ -143,6 +149,7 @@ class GameViewModel(
                 if (locationContinent == null) {
                     throw java.lang.Exception("Location API error")
                 }
+                Log.e("TONI02", "${_streetViewLocation.value}")
             } catch (e: Exception) {
                 _eventGameFinish.value = true
             }
@@ -151,6 +158,10 @@ class GameViewModel(
 
     fun startNextLocation() {
         _guessCompleted.value = false
+    }
+
+    fun streetViewLoaded() {
+        _streetViewLoaded.value = true
     }
 
     fun startTimer() {

@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.android.geoguessrlite.database.GameCategory
 import com.example.android.geoguessrlite.database.GameDuration
 
-private val DEFAULT_GAME_TYPE = GameCategory.WORLD
-private val DEFAULT_GAME_DURATION = GameDuration.ONE_MINUTE
+val DEFAULT_GAME_TYPE = GameCategory.WORLD
+val DEFAULT_GAME_DURATION = GameDuration.ONE_MINUTE
 
 class TitleViewModel(
     application: Application
@@ -25,11 +25,11 @@ class TitleViewModel(
         _selectedGameDuration.value = DEFAULT_GAME_DURATION.durationSeconds.toString()
     }
 
-    fun setGameType(selectedGameType: String) {
-        _selectedGameType.value = selectedGameType
+    fun setGameType(selectedGameType: String?) {
+        _selectedGameType.value = selectedGameType ?: DEFAULT_GAME_TYPE.label
     }
 
-    fun setGameDuration(selectedGameDuration: String) {
-        _selectedGameDuration.value = selectedGameDuration
+    fun setGameDuration(selectedGameDuration: String?) {
+        _selectedGameDuration.value = selectedGameDuration ?: DEFAULT_GAME_DURATION.label
     }
 }

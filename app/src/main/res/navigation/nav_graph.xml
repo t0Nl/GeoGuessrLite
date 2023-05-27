@@ -30,19 +30,12 @@
         android:id="@+id/titleFragment"
         android:name="com.example.android.geoguessrlite.ui.title.TitleFragment"
         android:label="TitleFragment" >
-        <argument
-            android:name="gameType"
-            app:argType="string"
-            android:defaultValue="@null"
-            app:nullable="true" />
-        <argument
-            android:name="gameDuration"
-            app:argType="string"
-            android:defaultValue="@null"
-            app:nullable="true" />
         <action
             android:id="@+id/action_titleFragment_to_selectionFragment"
             app:destination="@id/selectionFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectionFragment"

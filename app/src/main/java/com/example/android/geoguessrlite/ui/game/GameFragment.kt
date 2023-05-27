@@ -24,13 +24,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.StreetViewSource
 
 private const val DEFAULT_RESULT_BOUNDS_PADDING_VALUE = 280
 private val DEFAULT_LAT_LNG = LatLng(0.0, 0.0)
 
 private const val FINAL_RESULT_ARRAY_SIZE = 3
 private const val RESULT_ZOOM_LEVEL = 2f
-private const val STREET_VIEW_RADIUS = 10000
+private const val STREET_VIEW_RADIUS = 100000
 
 private const val HIDE_RESULT_ALPHA = 0f
 private const val SHOW_RESULT_ALPHA = .7f
@@ -101,7 +102,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
         viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
             guessLocation?.let {
-                streetView.setPosition(it, STREET_VIEW_RADIUS)
+                streetView.setPosition(it, STREET_VIEW_RADIUS, StreetViewSource.OUTDOOR)
             }
         }
 
@@ -114,6 +115,24 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                         60,
                     )
                 )
+            }
+        }
+
+        viewModel.guessCompleted.observe(viewLifecycleOwner) { guessCompleted ->
+            if (guessCompleted == false && viewModel.streetViewLoaded.value == true) {
+                viewModel.startTimer()
+            }
+        }
+
+        viewModel.streetViewLoaded.observe(viewLifecycleOwner) { streetViewLoaded ->
+            if (streetViewLoaded == true && viewModel.guessCompleted.value == false) {
+                viewModel.startTimer()
+            }
+        }
+
+        viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
+            guessLocation?.let {
+                streetView.setPosition(it, STREET_VIEW_RADIUS, StreetViewSource.OUTDOOR)
             }
         }
     }
@@ -146,11 +165,11 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
     override fun onStreetViewPanoramaReady(streetViewPanorama: StreetViewPanorama) {
         streetView = streetViewPanorama
-        streetView.isStreetNamesEnabled = false
-        streetView.isUserNavigationEnabled = false
+        streetViewPanorama.isStreetNamesEnabled = false
+        streetViewPanorama.isUserNavigationEnabled = false
 
-        streetView.setOnStreetViewPanoramaChangeListener {
-            viewModel.startTimer()
+        streetViewPanorama.setOnStreetViewPanoramaChangeListener {
+            viewModel.streetViewLoaded()
         }
     }
 

@@ -1,8 +1,10 @@
 package com.example.android.geoguessrlite.ui.game
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +13,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.android.geoguessrlite.R
+import com.example.android.geoguessrlite.database.GameCategory
 import com.example.android.geoguessrlite.databinding.FragmentGameBinding
+import com.example.android.geoguessrlite.ui.title.DEFAULT_GAME_TYPE
+import com.example.android.geoguessrlite.ui.title.GAME_TYPE_SHARED_PREFERENCES_KEY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -100,6 +105,12 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+        viewModel.setGameType(
+            GameCategory.values().first { it.label ==  sharedPref?.getString(GAME_TYPE_SHARED_PREFERENCES_KEY, DEFAULT_GAME_TYPE.label) }
+        )
+
         viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
             guessLocation?.let {
                 streetView.setPosition(it, STREET_VIEW_RADIUS, StreetViewSource.OUTDOOR)
@@ -152,6 +163,15 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
         binding.map.translationX = binding.map.measuredWidth.toFloat()
 
+        map.moveCamera(
+            MapCameraResetValues.resetZoomLevelForGameType[GameCategory.WORLD.label]?.let {
+                CameraUpdateFactory.newLatLngZoom(
+                    MapCameraResetValues.resetLatLngForGameType[GameCategory.WORLD.label],
+                    it,
+                )
+            }
+        )
+
         map.setOnMapClickListener { latLng ->
             binding.guessButton.isEnabled = true
             viewModel.currentMarker.value?.remove()
@@ -169,7 +189,11 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         streetViewPanorama.isUserNavigationEnabled = false
 
         streetViewPanorama.setOnStreetViewPanoramaChangeListener {
-            viewModel.streetViewLoaded()
+            if (it == null) {
+                viewModel.loadNextLocation()
+            } else {
+                viewModel.streetViewLoaded()
+            }
         }
     }
 
@@ -210,6 +234,15 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         viewModel.currentMarker.value?.remove()
         viewModel.targetMarker.value?.remove()
         viewModel.resultPolyline.value?.remove()
+
+        map.moveCamera(
+            MapCameraResetValues.resetZoomLevelForGameType[GameCategory.WORLD.label]?.let {
+                CameraUpdateFactory.newLatLngZoom(
+                    MapCameraResetValues.resetLatLngForGameType[GameCategory.WORLD.label],
+                    it,
+                )
+            }
+        )
 
         map.setOnMapClickListener { latLng ->
             binding.guessButton.isEnabled = true

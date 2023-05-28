@@ -185,11 +185,33 @@ class GameViewModel(
         }
     }
 
-    private fun getLocationFromDatabase() {
+    private suspend fun getLocationFromDatabase() {
         if (gameType == GameCategory.WORLD) {
+            var location = locationDatabase.getRandomLocation()
 
+            while (usedLocations.contains(LatLng(location.locationLatitude, location.locationLongitude))) {
+                location = locationDatabase.getRandomLocation()
+            }
+
+            _streetViewLocation.value = LatLng(
+                location.locationLatitude,
+                location.locationLongitude
+            )
+
+            usedLocations.add(LatLng(location.locationLatitude, location.locationLongitude))
         } else {
+            var location = locationDatabase.getRandomLocationFromRegion(gameType)
 
+            while (usedLocations.contains(LatLng(location.locationLatitude, location.locationLongitude))) {
+                location = locationDatabase.getRandomLocationFromRegion(gameType)
+            }
+
+            _streetViewLocation.value = LatLng(
+                location.locationLatitude,
+                location.locationLongitude
+            )
+
+            usedLocations.add(LatLng(location.locationLatitude, location.locationLongitude))
         }
     }
 

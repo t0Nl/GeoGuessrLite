@@ -35,6 +35,10 @@ class GameViewModel(
 
     val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
 
+    private var gameType = GameCategory.WORLD
+
+    private val usedLocations = mutableListOf<LatLng>()
+
     private lateinit var timer: CountDownTimer
 
     private val _guessCompleted = MutableLiveData<Boolean>()
@@ -132,27 +136,60 @@ class GameViewModel(
 
                     locationContinent = continentFinder.getContinent(guessLocationBounds.center)
 
-                    if (locationContinent != null) {
-                        _streetViewLocation.value = guessLocationBounds.center
+                    if (gameType == GameCategory.WORLD) {
+                        if (locationContinent != null && !usedLocations.contains(guessLocationBounds.center)) {
+                            _streetViewLocation.value = guessLocationBounds.center
 
-                        locationDatabase.insert(
-                            GuessLocation(
-                                locationLatitude = guessLocationBounds.center.latitude,
-                                locationLongitude = guessLocationBounds.center.longitude,
-                                gameCategory = locationContinent,
+                            usedLocations.add(guessLocationBounds.center)
+
+                            try {
+                                locationDatabase.insert(
+                                    GuessLocation(
+                                        locationLatitude = guessLocationBounds.center.latitude,
+                                        locationLongitude = guessLocationBounds.center.longitude,
+                                        gameCategory = locationContinent,
+                                    )
+                                )
+                            } catch (e: Exception) {
+                                Log.e("TONI", "${e.message}")
+                            }
+
+
+                            break
+                        }
+                    } else {
+                        if (locationContinent != null && !usedLocations.contains(guessLocationBounds.center) && locationContinent == gameType) {
+                            _streetViewLocation.value = guessLocationBounds.center
+
+                            usedLocations.add(guessLocationBounds.center)
+
+                            locationDatabase.insert(
+                                GuessLocation(
+                                    locationLatitude = guessLocationBounds.center.latitude,
+                                    locationLongitude = guessLocationBounds.center.longitude,
+                                    gameCategory = locationContinent,
+                                )
                             )
-                        )
 
-                        break
+                            break
+                        }
                     }
                 }
                 if (locationContinent == null) {
-                    throw java.lang.Exception("Location API error")
+                    getLocationFromDatabase()
                 }
-                Log.e("TONI02", "${_streetViewLocation.value}")
             } catch (e: Exception) {
+                Log.e("TONI", "${e.message}")
                 _eventGameFinish.value = true
             }
+        }
+    }
+
+    private fun getLocationFromDatabase() {
+        if (gameType == GameCategory.WORLD) {
+
+        } else {
+
         }
     }
 
@@ -162,6 +199,10 @@ class GameViewModel(
 
     fun streetViewLoaded() {
         _streetViewLoaded.value = true
+    }
+
+    fun setGameType(selectedGameType: GameCategory) {
+        gameType = selectedGameType
     }
 
     fun startTimer() {

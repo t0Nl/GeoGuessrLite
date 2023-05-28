@@ -1,0 +1,362 @@
+[
+  {
+    "locationLatitude":45.0830609,
+    "locationLongitude":13.635614,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":53.3465193,
+    "locationLongitude":-6.2458091,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":41.8931428,
+    "locationLongitude":12.4843068,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":40.4327363,
+    "locationLongitude":-3.6622255,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":48.8534513,
+    "locationLongitude":2.3488788,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":52.5186958,
+    "locationLongitude":13.401722,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":59.3942699,
+    "locationLongitude":18.0500809,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":52.2324529,
+    "locationLongitude":21.0073993,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":35.3425593,
+    "locationLongitude":25.1436494,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":47.0520554,
+    "locationLongitude":8.3092117,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":38.6920706,
+    "locationLongitude":-9.2150484,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":43.2891756,
+    "locationLongitude":5.3545793,
+    "gameCategory":"Europe"
+  },
+  {
+    "locationLatitude":33.6079051,
+    "locationLongitude":-7.633306,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":30.0282111,
+    "locationLongitude":31.259231,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":33.7319434,
+    "locationLongitude":10.8655264,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":6.6746696,
+    "locationLongitude":3.3109919,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":14.7854539,
+    "locationLongitude":-16.9399031,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":-0.4204518,
+    "locationLongitude":36.9498986,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":20.4434348,
+    "locationLongitude":57.3314678,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":-33.9252924,
+    "locationLongitude":18.426867,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":-26.2056161,
+    "locationLongitude":28.0475273,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":12.0413976,
+    "locationLongitude":8.572671,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":5.6179213,
+    "locationLongitude":-0.1868272,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":36.8948555,
+    "locationLongitude":4.1196709,
+    "gameCategory":"Africa"
+  },
+  {
+    "locationLatitude":31.9187029,
+    "locationLongitude":131.3787564,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":35.714466,
+    "locationLongitude":139.7967391,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":43.0815397,
+    "locationLongitude":141.3667756,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":37.545549,
+    "locationLongitude":126.9849277,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":47.9204657,
+    "locationLongitude":106.9153826,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":13.7372429,
+    "locationLongitude":100.5132937,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":-6.3141011,
+    "locationLongitude":106.7696292,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":6.8690698,
+    "locationLongitude":79.8586858,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":28.7242687,
+    "locationLongitude":77.1414772,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":25.0792486,
+    "locationLongitude":55.1219838,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":31.9640732,
+    "locationLongitude":34.8040182,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":41.6879559,
+    "locationLongitude":44.8094656,
+    "gameCategory":"Asia"
+  },
+  {
+    "locationLatitude":-42.8740704,
+    "locationLongitude":147.3674688,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-37.8246334,
+    "locationLongitude":144.9466068,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-33.8133481,
+    "locationLongitude":151.0098546,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-27.5236108,
+    "locationLongitude":153.2694185,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-34.9223669,
+    "locationLongitude":138.6110731,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-31.9372218,
+    "locationLongitude":115.7559627,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-12.4255873,
+    "locationLongitude":130.8355466,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-44.0361315,
+    "locationLongitude":-176.6453292,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-18.1420687,
+    "locationLongitude":178.4215131,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-36.8481753,
+    "locationLongitude":174.8387325,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-41.5282835,
+    "locationLongitude":174.0061776,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-46.3534379,
+    "locationLongitude":168.0129947,
+    "gameCategory":"Australia Pacific"
+  },
+  {
+    "locationLatitude":-33.4331662,
+    "locationLongitude":-70.6514667,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-34.0997703,
+    "locationLongitude":-56.2187047,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-23.5902916,
+    "locationLongitude":-46.6276056,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-12.1166881,
+    "locationLongitude":-77.0261887,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-0.0903165,
+    "locationLongitude":-78.4497277,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":4.6765603,
+    "locationLongitude":-74.0584782,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-1.4525922,
+    "locationLongitude":-48.4939542,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":2.8197382,
+    "locationLongitude":-60.6762549,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-17.7402398,
+    "locationLongitude":-63.1573129,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-29.8250097,
+    "locationLongitude":-51.1492167,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":-41.3194111,
+    "locationLongitude":-72.9796271,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":10.5242287,
+    "locationLongitude":-74.1833423,
+    "gameCategory":"South America"
+  },
+  {
+    "locationLatitude":26.0071907,
+    "locationLongitude":-80.1159979,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":40.8147086,
+    "locationLongitude":-73.9629484,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":45.5166257,
+    "locationLongitude":-73.5699705,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":49.2865498,
+    "locationLongitude":-123.1427309,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":53.5388599,
+    "locationLongitude":-113.5083494,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":60.9407297,
+    "locationLongitude":-149.1730193,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":45.5080666,
+    "locationLongitude":-122.6809888,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":36.2051643,
+    "locationLongitude":-115.2664061,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":34.0097333,
+    "locationLongitude":-118.4957316,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":35.6868365,
+    "locationLongitude":-105.940819,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":43.6419118,
+    "locationLongitude":-79.3861055,
+    "gameCategory":"North America"
+  },
+  {
+    "locationLatitude":29.9959105,
+    "locationLongitude":-90.1810396,
+    "gameCategory":"North America"
+  }
+]

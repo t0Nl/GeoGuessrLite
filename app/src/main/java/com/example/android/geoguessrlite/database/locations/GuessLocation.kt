@@ -9,12 +9,12 @@ import com.google.android.gms.maps.model.LatLng
 
 @Entity(
     tableName = "guess_location_table",
-//    indices = [
-//        Index(
-//            value = ["latitude", "longitude"],
-//            unique = true
-//        )
-//    ]
+    indices = [
+        Index(
+            value = ["latitude", "longitude"],
+            unique = true
+        )
+    ]
 )
 data class GuessLocation(
     @PrimaryKey(autoGenerate = true)

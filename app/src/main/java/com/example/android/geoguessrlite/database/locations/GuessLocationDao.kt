@@ -43,8 +43,8 @@ interface GuessLocationDao {
      * sorted by start time in descending order.
      */
     @Query("SELECT * FROM guess_location_table ORDER BY RANDOM() LIMIT 1")
-    fun getRandomLocation(): GuessLocation
+    suspend fun getRandomLocation(): GuessLocation
 
     @Query("SELECT * FROM guess_location_table WHERE location_category = :locationCategory ORDER BY RANDOM() LIMIT 1")
-    fun getRandomLocationFromRegion(locationCategory: GameCategory): GuessLocation
+    suspend fun getRandomLocationFromRegion(locationCategory: GameCategory): GuessLocation
 }

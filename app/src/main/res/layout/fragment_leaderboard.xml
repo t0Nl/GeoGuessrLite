@@ -19,15 +19,56 @@
         android:layout_height="match_parent"
         tools:context=".geoguessrlite.ui.selection.LeaderboardFragment">
 
+        <TextView
+            android:id="@+id/leaderboardScreenTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:text="@string/leaderboard"
+            app:layout_constraintBottom_toTopOf="@+id/selectGameType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/selectGameType"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:backgroundTint="@color/cardview_shadow_end_color"
+            android:padding="16dp"
+            android:text="@{@string/game_type_label + viewModel.selectedGameType}"
+            app:icon="@drawable/game_type_icon"
+            app:layout_constraintBottom_toTopOf="@+id/selectGameDuration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leaderboardScreenTitle" />
+
+        <Button
+            android:id="@+id/selectGameDuration"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:backgroundTint="@color/cardview_shadow_end_color"
+            android:padding="16dp"
+            android:text="@{@string/game_duration_label + viewModel.selectedGameDuration}"
+            app:icon="@drawable/game_duration_icon"
+            app:layout_constraintBottom_toTopOf="@+id/option_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectGameType" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/option_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

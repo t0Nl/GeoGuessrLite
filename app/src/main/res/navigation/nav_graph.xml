@@ -59,9 +59,19 @@
         <action
             android:id="@+id/action_selectionFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
+        <argument
+            android:name="selectionSource"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/leaderboardFragment"
         android:name="com.example.android.geoguessrlite.ui.leaderboard.LeaderboardFragment"
-        android:label="LeaderboardFragment" />
+        android:label="LeaderboardFragment" >
+        <action
+            android:id="@+id/action_leaderboardFragment_to_selectionFragment"
+            app:destination="@id/selectionFragment" />
+    </fragment>
 </navigation>

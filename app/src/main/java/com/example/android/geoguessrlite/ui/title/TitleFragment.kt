@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentTitleBinding
+import com.example.android.geoguessrlite.ui.selection.SelectionSource
 import com.example.android.geoguessrlite.ui.selection.SelectionType
 
 const val GAME_TYPE_SHARED_PREFERENCES_KEY = "game-type"
@@ -62,13 +63,13 @@ class TitleFragment : Fragment() {
 
         binding.selectGameType.setOnClickListener { buttonView: View ->
             buttonView.findNavController().navigate(
-                TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_TYPE.label)
+                TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_TYPE.label, SelectionSource.TITLE_FRAGMENT.label)
             )
         }
 
         binding.selectGameDuration.setOnClickListener { buttonView: View ->
             buttonView.findNavController().navigate(
-                TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_DURATION.label)
+                TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_DURATION.label, SelectionSource.TITLE_FRAGMENT.label)
             )
         }
 

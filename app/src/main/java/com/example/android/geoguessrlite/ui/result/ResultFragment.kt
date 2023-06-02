@@ -10,10 +10,6 @@ import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
-//    private val viewModel: ResultViewModel by lazy {
-//        ViewModelProvider(this)[ResultViewModel::class.java]
-//    }
-
     private lateinit var binding: FragmentResultBinding
 
     private fun setResults() {

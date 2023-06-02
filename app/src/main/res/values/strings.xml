@@ -11,6 +11,8 @@
 
     <string name="start_game_button">Start</string>
 
+    <string name="leaderboard">Leaderboard</string>
+
     <string name="play_again">Play Again</string>
     <string name="see_leaderboard">See Leaderboard</string>
     <string name="return_to_title">Return to Title</string>

@@ -57,10 +57,6 @@ class SelectionFragment : Fragment() {
                                 apply()
                             }
                         }
-
-                        this.findNavController().navigate(
-                            SelectionFragmentDirections.actionSelectionFragmentToTitleFragment()
-                        )
                     }
 
                     else -> {
@@ -71,7 +67,18 @@ class SelectionFragment : Fragment() {
                                 apply()
                             }
                         }
+                    }
+                }
 
+                val args = SelectionFragmentArgs.fromBundle(requireArguments())
+
+                when (args.selectionSource) {
+                    SelectionSource.LEADERBOARD_FRAGMENT.label -> {
+                        this.findNavController().navigate(
+                            SelectionFragmentDirections.actionSelectionFragmentToLeaderboardFragment()
+                        )
+                    }
+                    else -> {
                         this.findNavController().navigate(
                             SelectionFragmentDirections.actionSelectionFragmentToTitleFragment()
                         )

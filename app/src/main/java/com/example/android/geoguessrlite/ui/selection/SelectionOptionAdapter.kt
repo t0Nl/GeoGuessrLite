@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.geoguessrlite.databinding.SelectionItemViewBinding
 
-class SelectionOptionAdapter(val clickListener: OptionClickListenerListener) : ListAdapter<String, ViewHolder>(SleepNightDiffCallback()) {
+class SelectionOptionAdapter(private val clickListener: OptionClickListenerListener) : ListAdapter<String, ViewHolder>(SelectionDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(clickListener, item)
@@ -36,7 +36,7 @@ class ViewHolder private constructor(val binding: SelectionItemViewBinding) :
     }
 }
 
-class SleepNightDiffCallback :
+class SelectionDiffCallback :
     DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
         return oldItem == newItem

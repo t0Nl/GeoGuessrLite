@@ -45,5 +45,8 @@ interface ScoreDatabaseDao {
      * sorted by start time in descending order.
      */
     @Query("SELECT * FROM game_score_table WHERE game_duration = :gameDuration AND game_category = :gameCategory ORDER BY final_score DESC")
-    fun getFilteredScores(gameDuration: GameDuration, gameCategory: GameCategory): LiveData<List<GameScore>>
+    suspend fun getFilteredScores(gameDuration: GameDuration, gameCategory: GameCategory): List<GameScore>
+
+    @Query("SELECT * FROM game_score_table")
+    suspend fun getScores(): List<GameScore>
 }

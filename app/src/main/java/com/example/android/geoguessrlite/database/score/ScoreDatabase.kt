@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.android.geoguessrlite.database.Converters
 
-@Database(entities = [GameScore::class], version = 1, exportSchema = false)
+@Database(entities = [GameScore::class], version = 4, exportSchema = false)
 abstract class ScoreDatabase : RoomDatabase() {
 
     /**
@@ -71,7 +71,7 @@ abstract class ScoreDatabase : RoomDatabase() {
                         // migration with Room in this blog post:
                         // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
 //                        .addTypeConverter(Converters::class)
-                        //.fallbackToDestructiveMigration()
+                        .fallbackToDestructiveMigration()
                         .build()
                     // Assign INSTANCE to the newly created database.
                     INSTANCE = instance

@@ -54,6 +54,12 @@ class TitleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.leaderboardsButton.setOnClickListener { buttonView: View ->
+            buttonView.findNavController().navigate(
+                TitleFragmentDirections.actionTitleFragmentToLeaderboardFragment()
+            )
+        }
+
         binding.selectGameType.setOnClickListener { buttonView: View ->
             buttonView.findNavController().navigate(
                 TitleFragmentDirections.actionTitleFragmentToSelectionFragment(SelectionType.GAME_TYPE.label)

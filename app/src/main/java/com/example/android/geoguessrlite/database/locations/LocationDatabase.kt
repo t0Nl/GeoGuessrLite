@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.android.geoguessrlite.database.Converters
 import com.example.android.geoguessrlite.database.StartingLocationsPrefiler
 
-@Database(entities = [GuessLocation::class], version = 3, exportSchema = false)
+@Database(entities = [GuessLocation::class], version = 4, exportSchema = false)
 abstract class LocationDatabase : RoomDatabase() {
     abstract val guessLocationDao: GuessLocationDao
 
@@ -35,7 +35,7 @@ abstract class LocationDatabase : RoomDatabase() {
                         // Migration is not part of this lesson. You can learn more about
                         // migration with Room in this blog post:
                         // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-//                        .fallbackToDestructiveMigration()
+                        .fallbackToDestructiveMigration()
                         .addCallback(StartingLocationsPrefiler(context))
                         .build()
                     // Assign INSTANCE to the newly created database.

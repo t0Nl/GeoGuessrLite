@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_resultFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/titleFragment"
@@ -42,6 +45,9 @@
         <action
             android:id="@+id/action_titleFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_titleFragment_to_leaderboardFragment"
+            app:destination="@id/leaderboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectionFragment"
@@ -54,4 +60,8 @@
             android:id="@+id/action_selectionFragment_to_titleFragment"
             app:destination="@id/titleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.example.android.geoguessrlite.ui.leaderboard.LeaderboardFragment"
+        android:label="LeaderboardFragment" />
 </navigation>

@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentGameBinding
 import com.example.android.geoguessrlite.databinding.FragmentResultBinding
+import com.example.android.geoguessrlite.ui.selection.SelectionType
+import com.example.android.geoguessrlite.ui.title.TitleFragmentDirections
 
 class ResultFragment : Fragment() {
     private val viewModel: ResultViewModel by lazy {
@@ -36,5 +39,24 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setResults()
+
+        val args = ResultFragmentArgs.fromBundle(requireArguments())
+        viewModel.saveScoreToDataBase(
+            args.finalScore,
+            args.gameDuration,
+            args.gameType,
+        )
+
+        binding.playAgainButton.setOnClickListener { buttonView: View ->
+            buttonView.findNavController().navigate(
+                ResultFragmentDirections.actionResultFragmentToGameFragment()
+            )
+        }
+
+        binding.returnToTitleButton.setOnClickListener { buttonView: View ->
+            buttonView.findNavController().navigate(
+                ResultFragmentDirections.actionResultFragmentToTitleFragment()
+            )
+        }
     }
 }

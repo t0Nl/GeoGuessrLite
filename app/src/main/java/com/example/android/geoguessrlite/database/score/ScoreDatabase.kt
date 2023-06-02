@@ -8,13 +8,12 @@ import androidx.room.TypeConverters
 import com.example.android.geoguessrlite.database.Converters
 
 @Database(entities = [GameScore::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
 abstract class ScoreDatabase : RoomDatabase() {
 
     /**
      * Connects the database to the DAO.
      */
-    abstract val sleepDatabaseDao: ScoreDatabaseDao
+    abstract val scoreDatabaseDao: ScoreDatabaseDao
 
     /**
      * Define a companion object, this allows us to add functions on the SleepDatabase class.
@@ -71,8 +70,8 @@ abstract class ScoreDatabase : RoomDatabase() {
                         // Migration is not part of this lesson. You can learn more about
                         // migration with Room in this blog post:
                         // https://medium.com/androiddevelopers/understanding-migrations-with-room-f01e04b07929
-                        .addTypeConverter(Converters::class)
-                        .fallbackToDestructiveMigration()
+//                        .addTypeConverter(Converters::class)
+                        //.fallbackToDestructiveMigration()
                         .build()
                     // Assign INSTANCE to the newly created database.
                     INSTANCE = instance

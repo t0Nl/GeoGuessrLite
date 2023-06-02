@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.example.android.geoguessrlite.database.GameCategory
 import com.example.android.geoguessrlite.database.GameDuration
 import com.example.android.geoguessrlite.database.locations.GuessLocation
@@ -19,7 +20,6 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.Polyline
 import kotlinx.coroutines.launch
-import androidx.lifecycle.viewModelScope as viewModelScope1
 
 class GameViewModel(
     application: Application
@@ -34,7 +34,7 @@ class GameViewModel(
         private const val COUNTDOWN_TIME = 60L
     }
 
-    val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
+    private val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
 
     private var gameType = GameCategory.WORLD
 
@@ -115,7 +115,7 @@ class GameViewModel(
     fun loadNextLocation() {
         _streetViewLoaded.value = false
 
-        viewModelScope1.launch {
+        viewModelScope.launch {
             try {
                 val continentFinder = ContinentFinder()
                 val locations = GuessLocationsApi.retrofitService.getProperties()

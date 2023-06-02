@@ -12,7 +12,7 @@ data class GameScore(
     val scoreId: Long = 0L,
 
     @ColumnInfo(name = "final_score")
-    val finalScore: Int,
+    val finalScore: Long,
 
     @ColumnInfo(name = "game_duration")
     val gameDuration: GameDuration,

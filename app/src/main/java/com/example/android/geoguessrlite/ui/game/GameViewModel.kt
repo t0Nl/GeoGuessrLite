@@ -13,6 +13,8 @@ import com.example.android.geoguessrlite.database.GameCategory
 import com.example.android.geoguessrlite.database.GameDuration
 import com.example.android.geoguessrlite.database.locations.GuessLocation
 import com.example.android.geoguessrlite.database.locations.LocationDatabase
+import com.example.android.geoguessrlite.database.score.GameScore
+import com.example.android.geoguessrlite.database.score.ScoreDatabase
 import com.example.android.geoguessrlite.network.GuessLocationsApi
 import com.example.android.geoguessrlite.util.ContinentFinder
 import com.google.android.gms.maps.model.LatLng
@@ -36,7 +38,11 @@ class GameViewModel(
 
     private val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
 
+    private val scoreDatabase = ScoreDatabase.getInstance(application).scoreDatabaseDao
+
     private var gameType = GameCategory.WORLD
+
+    private var gameDuration = GameDuration.ONE_MINUTE
 
     private var countDownTime = GameDuration.ONE_MINUTE
 
@@ -65,8 +71,8 @@ class GameViewModel(
     private val _guessPoints = MutableLiveData<Int>()
     val guessPoints: LiveData<Int> = _guessPoints
 
-    private val _gameScore = MutableLiveData<Int>()
-    val gameScore: LiveData<Int> = _gameScore
+    private val _gameScore = MutableLiveData<Long>()
+    val gameScore: LiveData<Long> = _gameScore
 
     private val _eventGameFinish = MutableLiveData<Boolean>()
     val eventGameFinish: LiveData<Boolean>
@@ -245,8 +251,27 @@ class GameViewModel(
     }
 
     fun getGameType() = gameType
-    fun setGameDuration(gameDuration: Int) {
-        _currentTime.value = gameDuration.toLong()
+    fun setGameDuration(gameDurationInSeconds: Int) {
+        _currentTime.value = gameDurationInSeconds.toLong()
+        gameDuration = GameDuration.values().first { it.durationSeconds == gameDurationInSeconds }
+    }
+
+    private fun saveScoreToDataBase(
+        finalScore: Long,
+        gameDuration: GameDuration,
+        gameType: GameCategory,
+    ) {
+        if (finalScore > 0) {
+            viewModelScope.launch {
+                scoreDatabase.insert(
+                    GameScore(
+                        finalScore = finalScore,
+                        gameDuration = gameDuration,
+                        gameCategory = gameType,
+                    )
+                )
+            }
+        }
     }
 
     fun startTimer() {
@@ -260,6 +285,11 @@ class GameViewModel(
                 }
 
                 override fun onFinish() {
+                        saveScoreToDataBase(
+                            finalScore = _gameScore.value ?: 0,
+                            gameDuration = gameDuration,
+                            gameType = gameType,
+                        )
                     _eventGameFinish.value = true
                 }
             }

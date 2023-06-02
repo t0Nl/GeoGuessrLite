@@ -10,9 +10,9 @@ import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentResultBinding
 
 class ResultFragment : Fragment() {
-    private val viewModel: ResultViewModel by lazy {
-        ViewModelProvider(this)[ResultViewModel::class.java]
-    }
+//    private val viewModel: ResultViewModel by lazy {
+//        ViewModelProvider(this)[ResultViewModel::class.java]
+//    }
 
     private lateinit var binding: FragmentResultBinding
 
@@ -36,13 +36,6 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setResults()
-
-        val args = ResultFragmentArgs.fromBundle(requireArguments())
-        viewModel.saveScoreToDataBase(
-            args.finalScore,
-            args.gameDuration,
-            args.gameType,
-        )
 
         binding.playAgainButton.setOnClickListener { buttonView: View ->
             buttonView.findNavController().navigate(

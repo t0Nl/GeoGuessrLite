@@ -13,23 +13,6 @@ import kotlinx.coroutines.launch
 class ResultViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-    private val scoreDatabase = ScoreDatabase.getInstance(application).scoreDatabaseDao
 
-    fun saveScoreToDataBase(
-        finalScore: Long,
-        gameDuration: Int,
-        gameType: String,
-    ) {
-        if (finalScore > 0) {
-            viewModelScope.launch {
-                scoreDatabase.insert(
-                    GameScore(
-                        finalScore = finalScore,
-                        gameDuration = GameDuration.values().first { it.durationSeconds == gameDuration },
-                        gameCategory = GameCategory.values().first { it.label == gameType },
-                    )
-                )
-            }
-        }
-    }
+
 }

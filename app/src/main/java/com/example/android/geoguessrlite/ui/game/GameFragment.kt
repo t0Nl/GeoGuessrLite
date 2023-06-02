@@ -14,8 +14,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.example.android.geoguessrlite.R
 import com.example.android.geoguessrlite.database.GameCategory
+import com.example.android.geoguessrlite.database.GameDuration
 import com.example.android.geoguessrlite.databinding.FragmentGameBinding
+import com.example.android.geoguessrlite.ui.title.DEFAULT_GAME_DURATION
 import com.example.android.geoguessrlite.ui.title.DEFAULT_GAME_TYPE
+import com.example.android.geoguessrlite.ui.title.GAME_DURATION_SHARED_PREFERENCES_KEY
 import com.example.android.geoguessrlite.ui.title.GAME_TYPE_SHARED_PREFERENCES_KEY
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -111,6 +114,10 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
             GameCategory.values().first { it.label ==  sharedPref?.getString(GAME_TYPE_SHARED_PREFERENCES_KEY, DEFAULT_GAME_TYPE.label) }
         )
 
+        viewModel.setGameDuration(
+            GameDuration.values().first { it.label ==  sharedPref?.getString(GAME_DURATION_SHARED_PREFERENCES_KEY, DEFAULT_GAME_DURATION.label) }.durationSeconds
+        )
+
         viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
             guessLocation?.let {
                 streetView.setPosition(it, STREET_VIEW_RADIUS, StreetViewSource.OUTDOOR)
@@ -148,25 +155,15 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         }
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        try {
-//            val locationDatabase = LocationDatabase.getInstance(context).guessLocationDao
-//        } catch (e: Exception) {
-//            Log.e("TONI", "onCreateView", e)
-//            throw e
-//        }
-//    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
         binding.map.translationX = binding.map.measuredWidth.toFloat()
 
         map.moveCamera(
-            MapCameraResetValues.resetZoomLevelForGameType[GameCategory.WORLD.label]?.let {
+            MapCameraResetValues.resetZoomLevelForGameType[viewModel.getGameType().label]?.let {
                 CameraUpdateFactory.newLatLngZoom(
-                    MapCameraResetValues.resetLatLngForGameType[GameCategory.WORLD.label],
+                    MapCameraResetValues.resetLatLngForGameType[viewModel.getGameType().label],
                     it,
                 )
             }
@@ -236,9 +233,9 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         viewModel.resultPolyline.value?.remove()
 
         map.moveCamera(
-            MapCameraResetValues.resetZoomLevelForGameType[GameCategory.WORLD.label]?.let {
+            MapCameraResetValues.resetZoomLevelForGameType[viewModel.getGameType().label]?.let {
                 CameraUpdateFactory.newLatLngZoom(
-                    MapCameraResetValues.resetLatLngForGameType[GameCategory.WORLD.label],
+                    MapCameraResetValues.resetLatLngForGameType[viewModel.getGameType().label],
                     it,
                 )
             }

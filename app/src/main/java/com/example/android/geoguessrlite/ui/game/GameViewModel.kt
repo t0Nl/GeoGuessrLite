@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.android.geoguessrlite.database.GameCategory
+import com.example.android.geoguessrlite.database.GameDuration
 import com.example.android.geoguessrlite.database.locations.GuessLocation
 import com.example.android.geoguessrlite.database.locations.LocationDatabase
 import com.example.android.geoguessrlite.network.GuessLocationsApi
@@ -36,6 +37,8 @@ class GameViewModel(
     val locationDatabase = LocationDatabase.getInstance(application).guessLocationDao
 
     private var gameType = GameCategory.WORLD
+
+    private var countDownTime = GameDuration.ONE_MINUTE
 
     private val usedLocations = mutableListOf<LatLng>()
 
@@ -79,7 +82,7 @@ class GameViewModel(
 
     init {
         _guessCompleted.value = false
-        _currentTime.value = COUNTDOWN_TIME
+        _currentTime.value = countDownTime.durationSeconds.toLong()
         _guessPoints.value = 0
         _gameScore.value = 0
         loadNextLocation()
@@ -117,6 +120,7 @@ class GameViewModel(
                 val continentFinder = ContinentFinder()
                 val locations = GuessLocationsApi.retrofitService.getProperties()
                 var locationContinent: GameCategory? = null
+                var locationFound = false
 
                 for (location in locations) {
                     val guessLocationBounds = LatLngBounds.Builder()
@@ -154,7 +158,7 @@ class GameViewModel(
                                 Log.e("TONI", "${e.message}")
                             }
 
-
+                            locationFound = true
                             break
                         }
                     } else {
@@ -171,11 +175,12 @@ class GameViewModel(
                                 )
                             )
 
+                            locationFound = true
                             break
                         }
                     }
                 }
-                if (locationContinent == null) {
+                if (locationContinent == null || !locationFound) {
                     getLocationFromDatabase()
                 }
             } catch (e: Exception) {
@@ -189,7 +194,13 @@ class GameViewModel(
         if (gameType == GameCategory.WORLD) {
             var location = locationDatabase.getRandomLocation()
 
-            while (usedLocations.contains(LatLng(location.locationLatitude, location.locationLongitude))) {
+            while (usedLocations.contains(
+                    LatLng(
+                        location.locationLatitude,
+                        location.locationLongitude
+                    )
+                )
+            ) {
                 location = locationDatabase.getRandomLocation()
             }
 
@@ -202,7 +213,13 @@ class GameViewModel(
         } else {
             var location = locationDatabase.getRandomLocationFromRegion(gameType)
 
-            while (usedLocations.contains(LatLng(location.locationLatitude, location.locationLongitude))) {
+            while (usedLocations.contains(
+                    LatLng(
+                        location.locationLatitude,
+                        location.locationLongitude
+                    )
+                )
+            ) {
                 location = locationDatabase.getRandomLocationFromRegion(gameType)
             }
 
@@ -227,9 +244,17 @@ class GameViewModel(
         gameType = selectedGameType
     }
 
+    fun getGameType() = gameType
+    fun setGameDuration(gameDuration: Int) {
+        _currentTime.value = gameDuration.toLong()
+    }
+
     fun startTimer() {
         timer =
-            object : CountDownTimer(_currentTime.value?.times(1000) ?: COUNTDOWN_TIME, ONE_SECOND) {
+            object : CountDownTimer(
+                _currentTime.value?.times(1000) ?: countDownTime.durationSeconds.toLong(),
+                ONE_SECOND
+            ) {
                 override fun onTick(millisUntilFinished: Long) {
                     _currentTime.value = (millisUntilFinished / ONE_SECOND)
                 }

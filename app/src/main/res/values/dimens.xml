@@ -12,6 +12,7 @@
     <dimen name="pager_tabs_height">56dp</dimen>
     <dimen name="main_title_height">160dp</dimen>
     <dimen name="pager_tab_width">156dp</dimen>
+    <dimen name="leaderboard_bottom_blocker">126dp</dimen>
 
     <dimen name="text_size_large">30sp</dimen>
 </resources>

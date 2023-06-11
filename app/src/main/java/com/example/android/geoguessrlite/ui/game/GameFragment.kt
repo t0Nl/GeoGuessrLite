@@ -42,8 +42,8 @@ private const val RESULT_ZOOM_LEVEL = 2f
 private const val STREET_VIEW_RADIUS = 100000
 
 private const val HIDE_RESULT_ALPHA = 0f
-private const val SHOW_RESULT_ALPHA = .7f
-private const val VISIBILITY_TRANSITION_DURATION = 2000L
+private const val SHOW_RESULT_ALPHA = .8f
+private const val VISIBILITY_TRANSITION_DURATION = 1000L
 
 class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCallback {
     private val viewModel: GameViewModel by lazy {

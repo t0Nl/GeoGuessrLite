@@ -6,8 +6,11 @@
     <dimen name="small_spacing">8dp</dimen>
     <dimen name="normal_spacing">16dp</dimen>
     <dimen name="larger_spacing">32dp</dimen>
+    <dimen name="largest_spacing">48dp</dimen>
+    <dimen name="extra_large_spacing">100dp</dimen>
 
     <dimen name="pager_tabs_height">56dp</dimen>
+    <dimen name="main_title_height">160dp</dimen>
     <dimen name="pager_tab_width">156dp</dimen>
 
     <dimen name="text_size_large">30sp</dimen>

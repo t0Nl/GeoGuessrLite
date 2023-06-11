@@ -7,11 +7,12 @@
     <string name="guess_points_label">Guess Points:</string>
     <string name="final_score_label">Final Score:</string>
     <string name="total_score_label">Total Score:</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_geoguessr_lite">Geoguessr Lite</string>
 
     <string name="start_game_button">Start</string>
 
     <string name="leaderboard">Leaderboard</string>
+    <string name="leaderboardButtonText">See Leaderboards</string>
 
     <string name="play_again">Play Again</string>
     <string name="see_leaderboard">See Leaderboard</string>

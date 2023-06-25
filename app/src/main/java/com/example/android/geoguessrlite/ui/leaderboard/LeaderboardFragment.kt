@@ -40,6 +40,12 @@ class LeaderboardFragment : Fragment() {
         viewModel.gameScores.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+
+                if (it.isEmpty()) {
+                    binding.noScoresText.visibility = View.VISIBLE
+                } else {
+                    binding.noScoresText.visibility = View.GONE
+                }
             }
         })
 

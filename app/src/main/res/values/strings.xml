@@ -12,6 +12,7 @@
     <string name="start_game_button">Start</string>
 
     <string name="leaderboard">Leaderboard</string>
+    <string name="emptyLeaderboard">No Scores To Show</string>
     <string name="leaderboardButtonText">See Leaderboards</string>
 
     <string name="play_again">Play Again</string>

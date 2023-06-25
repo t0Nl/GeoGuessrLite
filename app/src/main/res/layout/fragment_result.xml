@@ -21,58 +21,67 @@
             android:id="@+id/categoryLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/extra_large_spacing"
             android:text="@string/game_type_label"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/categoryValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smaller_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/categoryLabel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryLabel" />
 
         <TextView
             android:id="@+id/durationLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/largest_spacing"
             android:text="@string/game_duration_label"
-            app:layout_constraintTop_toBottomOf="@+id/categoryValue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryValue" />
 
         <TextView
             android:id="@+id/durationValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smaller_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/durationLabel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/durationLabel" />
 
         <TextView
             android:id="@+id/finalScoreLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smaller_spacing"
+            android:layout_marginTop="@dimen/largest_spacing"
             android:text="@string/guess_points_label"
-            app:layout_constraintTop_toBottomOf="@+id/durationValue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/durationValue" />
 
         <TextView
             android:id="@+id/finalScoreValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/smaller_spacing"
-            app:layout_constraintTop_toBottomOf="@+id/finalScoreLabel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/finalScoreLabel" />
 
         <Button
             android:id="@+id/playAgainButton"

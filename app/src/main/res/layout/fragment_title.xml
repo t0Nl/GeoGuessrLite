@@ -15,22 +15,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/seed"
-        android:layout_height="match_parent">
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/leaderboardsButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="@dimen/pager_tabs_height"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:contentDescription="placeholder"-->
-<!--            android:padding="@dimen/smaller_spacing"-->
-<!--            android:paddingHorizontal="@dimen/pager_tab_width"-->
-<!--            android:paddingVertical="@dimen/smaller_spacing"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/leaderboard_icon" />-->
+        android:layout_height="match_parent"
+        android:background="@color/seed">
 
         <ImageView
             android:id="@+id/gameTitle"
@@ -38,20 +24,10 @@
             android:layout_height="@dimen/main_title_height"
             android:layout_marginHorizontal="@dimen/normal_spacing"
             android:layout_marginTop="@dimen/largest_spacing"
+            android:src="@drawable/game_main_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/game_main_title" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/gameTitle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/smaller_spacing"-->
-<!--            android:text="@string/app_name"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/leaderboardsButton" />-->
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/leaderboardsButton"
@@ -60,13 +36,14 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
             android:layout_marginTop="@dimen/extra_large_spacing"
-            app:icon="@drawable/leaderboard_icon"
-            android:backgroundTint="@color/design_default_color_on_primary"
+            android:backgroundTint="?attr/colorSecondaryContainer"
             android:padding="16dp"
+            android:singleLine="true"
             android:text="@string/leaderboardButtonText"
-            app:layout_constraintTop_toBottomOf="@+id/gameTitle"
+            app:icon="@drawable/leaderboard_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
 
         <Button
             android:id="@+id/selectGameType"
@@ -74,13 +51,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
-            app:icon="@drawable/game_type_icon"
-            android:backgroundTint="@color/md_theme_light_onPrimary"
+            android:backgroundTint="?attr/colorSecondaryContainer"
             android:padding="16dp"
+            android:singleLine="true"
             android:text="@{@string/game_type_label + viewModel.selectedGameType}"
-            app:layout_constraintTop_toBottomOf="@+id/leaderboardsButton"
+            app:icon="@drawable/game_type_icon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leaderboardsButton" />
 
         <Button
             android:id="@+id/selectGameDuration"
@@ -88,28 +66,41 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:backgroundTint="?attr/colorSecondaryContainer"
             android:padding="16dp"
+            android:singleLine="true"
             android:text="@{@string/game_duration_label + viewModel.selectedGameDuration}"
             app:icon="@drawable/game_duration_icon"
-            android:backgroundTint="@color/md_theme_light_onPrimary"
-            app:layout_constraintTop_toBottomOf="@+id/selectGameType"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectGameType" />
 
-        <Button
+        <com.example.android.geoguessrlite.ui.title.StartButton
             android:id="@+id/startGameButton"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/larger_spacing"
-            app:icon="@drawable/game_icon"
-            android:backgroundTint="@color/md_theme_light_onPrimary"
-            android:padding="16dp"
-            android:text="@string/start_game_button"
-            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            app:buttonColor="@color/white"
+            app:buttonTextColor="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />
+
+        <!--        <Button-->
+        <!--            android:id="@+id/startGameButton"-->
+        <!--            style="@style/Widget.MaterialComponents.Button.TextButton"-->
+        <!--            android:layout_width="fill_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="@dimen/larger_spacing"-->
+        <!--            android:backgroundTint="?attr/colorSecondaryContainer"-->
+        <!--            android:padding="16dp"-->
+        <!--            android:singleLine="true"-->
+        <!--            android:text="@string/start_game_button"-->
+        <!--            app:icon="@drawable/game_icon"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

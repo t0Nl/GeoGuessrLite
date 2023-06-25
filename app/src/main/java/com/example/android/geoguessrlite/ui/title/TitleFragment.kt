@@ -2,6 +2,7 @@ package com.example.android.geoguessrlite.ui.title
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.android.geoguessrlite.R
 import com.example.android.geoguessrlite.databinding.FragmentTitleBinding
 import com.example.android.geoguessrlite.ui.selection.SelectionSource
 import com.example.android.geoguessrlite.ui.selection.SelectionType

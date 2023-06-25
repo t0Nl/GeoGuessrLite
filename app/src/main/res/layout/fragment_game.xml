@@ -37,6 +37,15 @@
             app:layout_constraintStart_toEndOf="@+id/streetView"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.example.android.geoguessrlite.ui.game.LoadingSpinner
+            android:id="@+id/loadingSpinner"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toTopOf="@+id/guessButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myRectangleView" />
+
         <View
             android:id="@+id/myRectangleView"
             android:layout_width="match_parent"

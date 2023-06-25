@@ -251,6 +251,8 @@ class GameViewModel(
     }
 
     fun getGameType() = gameType
+
+    fun getGameDuration() = gameDuration
     fun setGameDuration(gameDurationInSeconds: Int) {
         _currentTime.value = gameDurationInSeconds.toLong()
         gameDuration = GameDuration.values().first { it.durationSeconds == gameDurationInSeconds }
@@ -285,11 +287,11 @@ class GameViewModel(
                 }
 
                 override fun onFinish() {
-                        saveScoreToDataBase(
-                            finalScore = _gameScore.value ?: 0,
-                            gameDuration = gameDuration,
-                            gameType = gameType,
-                        )
+                    saveScoreToDataBase(
+                        finalScore = _gameScore.value ?: 0,
+                        gameDuration = gameDuration,
+                        gameType = gameType,
+                    )
                     _eventGameFinish.value = true
                 }
             }

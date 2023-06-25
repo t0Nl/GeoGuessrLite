@@ -4,7 +4,6 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,6 +75,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
 
         binding.guessButton.setOnClickListener {
             if (viewModel.guessCompleted.value == true) {
+                enablePagerButtons()
                 resetMapView()
 
                 binding.guessButton.text = getString(R.string.guess_label)
@@ -86,11 +86,13 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
             } else {
                 binding.guessButton.text = getString(R.string.continue_label)
 
-                transitionToMap()
                 rateGuessAccuracy()
+                transitionToMap()
                 disableMapClicks()
+                disablePagerButtons()
                 showGuessResult()
                 viewModel.loadNextLocation()
+                binding.loadingSpinner.translationZ = 1f
             }
         }
 
@@ -111,11 +113,21 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
         viewModel.setGameType(
-            GameCategory.values().first { it.label ==  sharedPref?.getString(GAME_TYPE_SHARED_PREFERENCES_KEY, DEFAULT_GAME_TYPE.label) }
+            GameCategory.values().first {
+                it.label == sharedPref?.getString(
+                    GAME_TYPE_SHARED_PREFERENCES_KEY,
+                    DEFAULT_GAME_TYPE.label
+                )
+            }
         )
 
         viewModel.setGameDuration(
-            GameDuration.values().first { it.label ==  sharedPref?.getString(GAME_DURATION_SHARED_PREFERENCES_KEY, DEFAULT_GAME_DURATION.label) }.durationSeconds
+            GameDuration.values().first {
+                it.label == sharedPref?.getString(
+                    GAME_DURATION_SHARED_PREFERENCES_KEY,
+                    DEFAULT_GAME_DURATION.label
+                )
+            }.durationSeconds
         )
 
         viewModel.streetViewLocation.observe(viewLifecycleOwner) { guessLocation ->
@@ -129,8 +141,8 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                 findNavController(this).navigate(
                     GameFragmentDirections.actionGameFragmentToResultFragment(
                         viewModel.gameScore.value?.toLong() ?: 0L,
-                        "World",
-                        60,
+                        viewModel.getGameType().label,
+                        viewModel.getGameDuration().durationSeconds,
                     )
                 )
             }
@@ -189,6 +201,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
             if (it == null) {
                 viewModel.loadNextLocation()
             } else {
+                binding.loadingSpinner.translationZ = -1f
                 viewModel.streetViewLoaded()
             }
         }
@@ -266,6 +279,14 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                 R.anim.pager_translation_street_view_exit
             )
         )
+        if (viewModel.guessCompleted.value == false) {
+            binding.loadingSpinner.startAnimation(
+                AnimationUtils.loadAnimation(
+                    requireContext(),
+                    R.anim.pager_spinner_translation_exit
+                )
+            )
+        }
     }
 
     private fun transitionToStreetView() {
@@ -281,7 +302,15 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                 R.anim.pager_translation_street_view_enter
             )
         )
+        binding.loadingSpinner.startAnimation(
+            AnimationUtils.loadAnimation(
+                requireContext(),
+                R.anim.pager_spinner_translation_enter
+            )
+        )
+
         binding.streetView.translationX = 0f
+        binding.loadingSpinner.translationX = 0f
         binding.map.translationX = binding.map.measuredWidth.toFloat()
     }
 
@@ -289,6 +318,16 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
         map.setOnMapClickListener {
             // do nothing
         }
+    }
+
+    private fun disablePagerButtons() {
+        binding.mapButton.isEnabled = false
+        binding.pinButton.isEnabled = false
+    }
+
+    private fun enablePagerButtons() {
+        binding.mapButton.isEnabled = true
+        binding.pinButton.isEnabled = true
     }
 
     private fun rateGuessAccuracy() {

@@ -29,7 +29,7 @@ class LeaderboardViewModel(
 
     init {
         _selectedGameType.value = DEFAULT_GAME_TYPE.label
-        _selectedGameDuration.value = DEFAULT_GAME_DURATION.durationSeconds.toString()
+        _selectedGameDuration.value = DEFAULT_GAME_DURATION.label
     }
 
     fun setFilterParams(

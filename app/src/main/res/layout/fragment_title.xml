@@ -86,21 +86,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />
 
-        <!--        <Button-->
-        <!--            android:id="@+id/startGameButton"-->
-        <!--            style="@style/Widget.MaterialComponents.Button.TextButton"-->
-        <!--            android:layout_width="fill_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginHorizontal="@dimen/larger_spacing"-->
-        <!--            android:backgroundTint="?attr/colorSecondaryContainer"-->
-        <!--            android:padding="16dp"-->
-        <!--            android:singleLine="true"-->
-        <!--            android:text="@string/start_game_button"-->
-        <!--            app:icon="@drawable/game_icon"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

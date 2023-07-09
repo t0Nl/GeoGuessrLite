@@ -14,5 +14,9 @@
     <dimen name="pager_tab_width">156dp</dimen>
     <dimen name="leaderboard_bottom_blocker">126dp</dimen>
 
+    <dimen name="start_button_dimen">180dp</dimen>
+    <dimen name="loading_spinner_dimen">120dp</dimen>
+    <dimen name="guess_result_background_dimen">154dp</dimen>
+
     <dimen name="text_size_large">30sp</dimen>
 </resources>

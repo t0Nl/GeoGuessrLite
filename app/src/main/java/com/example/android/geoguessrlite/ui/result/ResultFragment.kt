@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.android.geoguessrlite.databinding.FragmentResultBinding
 
@@ -15,7 +14,7 @@ class ResultFragment : Fragment() {
     private fun setResults() {
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         binding.categoryValue.text = args.gameType
-        binding.durationValue.text = args.gameDuration.toString()
+        binding.durationValue.text = args.gameDuration
         binding.finalScoreValue.text = args.finalScore.toString()
     }
 

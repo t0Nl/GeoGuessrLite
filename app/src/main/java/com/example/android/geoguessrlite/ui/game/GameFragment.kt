@@ -142,7 +142,7 @@ class GameFragment : Fragment(), OnMapReadyCallback, OnStreetViewPanoramaReadyCa
                     GameFragmentDirections.actionGameFragmentToResultFragment(
                         viewModel.gameScore.value?.toLong() ?: 0L,
                         viewModel.getGameType().label,
-                        viewModel.getGameDuration().durationSeconds,
+                        viewModel.getGameDuration().label,
                     )
                 )
             }

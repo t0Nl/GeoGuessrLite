@@ -24,6 +24,7 @@
             android:layout_height="@dimen/main_title_height"
             android:layout_marginHorizontal="@dimen/normal_spacing"
             android:layout_marginTop="@dimen/largest_spacing"
+            android:contentDescription="@string/title_image_description"
             android:src="@drawable/game_main_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

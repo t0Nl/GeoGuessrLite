@@ -11,18 +11,34 @@
             <KeyAttribute
                 android:alpha="0"
                 app:framePosition="0"
+                app:motionTarget="@id/resultScreenImage" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="14"
+                app:motionTarget="@id/resultScreenImage" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/categoryLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="14"
                 app:motionTarget="@id/categoryLabel" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="16"
+                app:framePosition="28"
                 app:motionTarget="@id/categoryLabel" />
             <KeyAttribute
                 android:alpha="0"
                 app:framePosition="0"
                 app:motionTarget="@id/categoryValue" />
             <KeyAttribute
+                android:alpha="0"
+                app:framePosition="14"
+                app:motionTarget="@id/categoryValue" />
+            <KeyAttribute
                 android:alpha="1"
-                app:framePosition="16"
+                app:framePosition="28"
                 app:motionTarget="@id/categoryValue" />
             <KeyAttribute
                 android:alpha="0"
@@ -30,11 +46,11 @@
                 app:motionTarget="@id/durationLabel" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="16"
+                app:framePosition="28"
                 app:motionTarget="@id/durationLabel" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="32"
+                app:framePosition="42"
                 app:motionTarget="@id/durationLabel" />
             <KeyAttribute
                 android:alpha="0"
@@ -42,11 +58,11 @@
                 app:motionTarget="@id/durationValue" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="16"
+                app:framePosition="28"
                 app:motionTarget="@id/durationValue" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="32"
+                app:framePosition="42"
                 app:motionTarget="@id/durationValue" />
             <KeyAttribute
                 android:alpha="0"
@@ -54,11 +70,11 @@
                 app:motionTarget="@id/finalScoreLabel" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="32"
+                app:framePosition="42"
                 app:motionTarget="@id/finalScoreLabel" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="48"
+                app:framePosition="56"
                 app:motionTarget="@id/finalScoreLabel" />
             <KeyAttribute
                 android:alpha="0"
@@ -66,11 +82,11 @@
                 app:motionTarget="@id/finalScoreValue" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="32"
+                app:framePosition="42"
                 app:motionTarget="@id/finalScoreValue" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="48"
+                app:framePosition="56"
                 app:motionTarget="@id/finalScoreValue" />
             <KeyAttribute
                 android:alpha="0"
@@ -78,11 +94,11 @@
                 app:motionTarget="@id/playAgainButton" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="48"
+                app:framePosition="56"
                 app:motionTarget="@id/playAgainButton" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="64"
+                app:framePosition="70"
                 app:motionTarget="@id/playAgainButton" />
             <KeyAttribute
                 android:alpha="0"
@@ -90,11 +106,11 @@
                 app:motionTarget="@id/seeLeaderboardButton" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="64"
+                app:framePosition="70"
                 app:motionTarget="@id/seeLeaderboardButton" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="80"
+                app:framePosition="84"
                 app:motionTarget="@id/seeLeaderboardButton" />
             <KeyAttribute
                 android:alpha="0"
@@ -102,11 +118,11 @@
                 app:motionTarget="@id/returnToTitleButton" />
             <KeyAttribute
                 android:alpha="0"
-                app:framePosition="80"
+                app:framePosition="84"
                 app:motionTarget="@id/returnToTitleButton" />
             <KeyAttribute
                 android:alpha="1"
-                app:framePosition="96"
+                app:framePosition="98"
                 app:motionTarget="@id/returnToTitleButton" />
         </KeyFrameSet>
     </Transition>

@@ -8,16 +8,26 @@
         android:layout_height="match_parent"
         app:layoutDescription="@xml/fragment_result_motion_scene">
 
+        <ImageView
+            android:id="@+id/resultScreenImage"
+            android:layout_width="@dimen/extra_large_spacing"
+            android:layout_height="@dimen/extra_large_spacing"
+            android:layout_marginTop="@dimen/normal_spacing"
+            android:contentDescription="@string/result_screen_image_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/categoryLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/extra_large_spacing"
+            android:layout_marginTop="@dimen/larger_spacing"
             android:text="@string/game_type_label"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/resultScreenImage" />
 
         <TextView
             android:id="@+id/categoryValue"

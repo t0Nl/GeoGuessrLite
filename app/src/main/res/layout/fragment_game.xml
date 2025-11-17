@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.android.geoguessrlite.ui.game.GameViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/streetView"
+            class="com.google.android.gms.maps.SupportStreetViewPanoramaFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/streetView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.android.geoguessrlite.ui.game.LoadingSpinner
+            android:id="@+id/loadingSpinner"
+            android:layout_width="@dimen/loading_spinner_dimen"
+            android:layout_height="@dimen/loading_spinner_dimen"
+            app:layout_constraintBottom_toTopOf="@+id/guessButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myRectangleView" />
+
+        <View
+            android:id="@+id/myRectangleView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pager_tabs_height"
+            android:background="@drawable/rectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/pinButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pager_tabs_height"
+            android:adjustViewBounds="true"
+            android:backgroundTint="?attr/colorOnPrimary"
+            android:contentDescription="placeholder"
+            android:padding="@dimen/smaller_spacing"
+            android:paddingHorizontal="@dimen/pager_tab_width"
+            android:paddingVertical="@dimen/smaller_spacing"
+            android:scaleType="fitCenter"
+
+            app:layout_constraintEnd_toStartOf="@+id/mapButton"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_pin" />
+
+        <ImageButton
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pager_tabs_height"
+            android:adjustViewBounds="true"
+            android:backgroundTint="?attr/colorOnPrimary"
+            android:contentDescription="placeholder"
+            android:padding="@dimen/smaller_spacing"
+            android:paddingHorizontal="@dimen/pager_tab_width"
+            android:paddingVertical="@dimen/smaller_spacing"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pinButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_map" />
+
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:background="@drawable/rounded_corner_shape"
+            android:paddingHorizontal="@dimen/small_spacing"
+            android:paddingVertical="@dimen/smaller_spacing"
+            android:text="@{viewModel.currentTimeString}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myRectangleView" />
+
+        <View
+            android:id="@+id/resultRoundedCornerBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/guess_result_background_dimen"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:alpha="0"
+            android:background="@drawable/rounded_corner_shape"
+            app:layout_constraintBottom_toBottomOf="@id/totalScoreDisplay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guessPointsLabel" />
+
+        <TextView
+            android:id="@+id/guessPointsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:alpha="0"
+            android:text="@string/guess_points_label"
+            app:layout_constraintBottom_toTopOf="@+id/guessPointsDisplay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/guessPointsDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:layout_marginBottom="@dimen/small_spacing"
+            android:alpha="0"
+            android:text="@{viewModel.guessPoints.toString()}"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toTopOf="@+id/totalScoreLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/totalScoreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:alpha="0"
+            android:text="@string/total_score_label"
+            app:layout_constraintBottom_toTopOf="@+id/totalScoreDisplay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/totalScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smaller_spacing"
+            android:layout_marginBottom="@dimen/larger_spacing"
+            android:alpha="0"
+            android:text="@{viewModel.gameScore.toString()}"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toTopOf="@+id/guessButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/guessButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:paddingVertical="@dimen/normal_spacing"
+            android:text="@string/guess_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

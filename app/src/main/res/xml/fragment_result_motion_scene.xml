@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="2800">
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/resultScreenImage" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="14"
+                app:motionTarget="@id/resultScreenImage" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/categoryLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="14"
+                app:motionTarget="@id/categoryLabel" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="28"
+                app:motionTarget="@id/categoryLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/categoryValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="14"
+                app:motionTarget="@id/categoryValue" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="28"
+                app:motionTarget="@id/categoryValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/durationLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="28"
+                app:motionTarget="@id/durationLabel" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="42"
+                app:motionTarget="@id/durationLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/durationValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="28"
+                app:motionTarget="@id/durationValue" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="42"
+                app:motionTarget="@id/durationValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/finalScoreLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="42"
+                app:motionTarget="@id/finalScoreLabel" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="56"
+                app:motionTarget="@id/finalScoreLabel" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/finalScoreValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="42"
+                app:motionTarget="@id/finalScoreValue" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="56"
+                app:motionTarget="@id/finalScoreValue" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/playAgainButton" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="56"
+                app:motionTarget="@id/playAgainButton" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="70"
+                app:motionTarget="@id/playAgainButton" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/seeLeaderboardButton" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="70"
+                app:motionTarget="@id/seeLeaderboardButton" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="84"
+                app:motionTarget="@id/seeLeaderboardButton" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="0"
+                app:motionTarget="@id/returnToTitleButton" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="84"
+                app:motionTarget="@id/returnToTitleButton" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="98"
+                app:motionTarget="@id/returnToTitleButton" />
+        </KeyFrameSet>
+    </Transition>
+</MotionScene>

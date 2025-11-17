@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="micro_spacing">1dp</dimen>
+    <dimen name="mini_spacing">2dp</dimen>
+    <dimen name="smaller_spacing">4dp</dimen>
+    <dimen name="small_spacing">8dp</dimen>
+    <dimen name="normal_spacing">16dp</dimen>
+    <dimen name="larger_spacing">32dp</dimen>
+    <dimen name="largest_spacing">48dp</dimen>
+    <dimen name="extra_large_spacing">100dp</dimen>
+
+    <dimen name="pager_tabs_height">56dp</dimen>
+    <dimen name="main_title_height">160dp</dimen>
+    <dimen name="pager_tab_width">156dp</dimen>
+    <dimen name="leaderboard_bottom_blocker">126dp</dimen>
+
+    <dimen name="start_button_dimen">180dp</dimen>
+    <dimen name="loading_spinner_dimen">120dp</dimen>
+    <dimen name="guess_result_background_dimen">154dp</dimen>
+
+    <dimen name="text_size_large">30sp</dimen>
+</resources>

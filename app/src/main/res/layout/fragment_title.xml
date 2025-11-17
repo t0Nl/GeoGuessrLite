@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.android.geoguessrlite.ui.title.TitleViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/seed">
+
+        <ImageView
+            android:id="@+id/gameTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/main_title_height"
+            android:layout_marginHorizontal="@dimen/normal_spacing"
+            android:layout_marginTop="@dimen/largest_spacing"
+            android:contentDescription="@string/title_image_description"
+            android:src="@drawable/game_main_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/leaderboardsButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:layout_marginTop="@dimen/extra_large_spacing"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            android:padding="@dimen/normal_spacing"
+            android:singleLine="true"
+            android:text="@string/leaderboardButtonText"
+            app:icon="@drawable/leaderboard_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gameTitle" />
+
+        <Button
+            android:id="@+id/selectGameType"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            android:padding="@dimen/normal_spacing"
+            android:singleLine="true"
+            android:text="@{@string/game_type_label + viewModel.selectedGameType}"
+            app:icon="@drawable/game_type_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leaderboardsButton" />
+
+        <Button
+            android:id="@+id/selectGameDuration"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/larger_spacing"
+            android:backgroundTint="?attr/colorSecondaryContainer"
+            android:padding="@dimen/normal_spacing"
+            android:singleLine="true"
+            android:text="@{@string/game_duration_label + viewModel.selectedGameDuration}"
+            app:icon="@drawable/game_duration_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectGameType" />
+
+        <com.example.android.geoguessrlite.ui.title.StartButton
+            android:id="@+id/startGameButton"
+            android:layout_width="@dimen/start_button_dimen"
+            android:layout_height="@dimen/start_button_dimen"
+            app:buttonColor="@color/white"
+            app:buttonTextColor="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectGameDuration" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="label"
+            type="String" />
+
+        <variable
+            name="clickListener"
+            type="com.example.android.geoguessrlite.ui.selection.OptionClickListenerListener" />
+    </data>
+
+    <Button
+        android:id="@+id/selectionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/larger_spacing"
+        android:onClick="@{() -> clickListener.onClick(label)}"
+        android:paddingStart="@dimen/normal_spacing"
+        android:paddingEnd="@dimen/normal_spacing"
+        android:textSize="24sp"
+        app:label="@{label}" />
+
+</layout>

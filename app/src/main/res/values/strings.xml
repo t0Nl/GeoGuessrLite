@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">GeoGuessr Lite</string>
+    <string name="guess_label">Guess</string>
+    <string name="continue_label">Continue</string>
+    <string name="game_type_label">Game Type:&#160;</string>
+    <string name="game_duration_label">Game Duration:&#160;</string>
+    <string name="guess_points_label">Guess Points:</string>
+    <string name="final_score_label">Final Score:</string>
+    <string name="total_score_label">Total Score:</string>
+    <string name="title_activity_geoguessr_lite">Geoguessr Lite</string>
+
+    <string name="start_game_button">Start</string>
+
+    <string name="leaderboard">Leaderboard</string>
+    <string name="emptyLeaderboard">No Scores To Show</string>
+    <string name="leaderboardButtonText">See Leaderboards</string>
+
+    <string name="play_again">Play Again</string>
+    <string name="see_leaderboard">See Leaderboard</string>
+    <string name="return_to_title">Return to Title</string>
+
+    <string name="daily_reminder_title">Daily Practice Reminder</string>
+    <string name="daily_reminder_text">Play a round of Geoguessr to keep your skills sharp!</string>
+
+    <string name="result_screen_image_description">Image of a trophy</string>
+    <string name="title_image_description">Geoguessr lite logo</string>
+</resources>
